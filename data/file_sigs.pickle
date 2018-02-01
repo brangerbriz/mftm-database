@@ -1,0 +1,2742 @@
+(lp1
+(lp2
+S'41435344'
+p3
+aS'AOL parameter|info files'
+p4
+aa(lp5
+S'62706c697374'
+p6
+aS'Binary property list (plist)'
+p7
+aa(lp8
+S'001400000102'
+p9
+aS'BIOS details in RAM'
+p10
+aa(lp11
+S'3037303730'
+p12
+aS'cpio archive'
+p13
+aa(lp14
+S'7f454c46'
+p15
+aS'ELF executable'
+p16
+aa(lp17
+S'a1b2cd34'
+p18
+aS'Extended tcpdump (libpcap) capture file'
+p19
+aa(lp20
+S'04000000'
+p21
+aS'INFO2 Windows recycle bin_1'
+p22
+aa(lp23
+S'05000000'
+p24
+aS'INFO2 Windows recycle bin_2'
+p25
+aa(lp26
+S'aced'
+p27
+aS'Java serialization data'
+p28
+aa(lp29
+S'4b57414a88f027d1'
+p30
+aS'KWAJ (compressed) file'
+p31
+aa(lp32
+S'cd20aaaa02000000'
+p33
+aS'NAV quarantined virus file'
+p34
+aa(lp35
+S'535a2088f02733d1'
+p36
+aS'QBASIC SZDD file'
+p37
+aa(lp38
+S'6f3c'
+p39
+aS'SMS text (SIM)'
+p40
+aa(lp41
+S'535a444488f02733'
+p42
+aS'SZDD file format'
+p43
+aa(lp44
+S'a1b2c3d4'
+p45
+aS'tcpdump (libpcap) capture file'
+p46
+aa(lp47
+S'34cdb2a1'
+p48
+aS'Tcpdump capture file'
+p49
+aa(lp50
+S'efbbbf'
+p51
+aS'UTF8 file'
+p52
+aa(lp53
+S'feff'
+p54
+aS'UTF-16|UCS-2 file'
+p55
+aa(lp56
+S'fffe0000'
+p57
+aS'UTF-32|UCS-4 file'
+p58
+aa(lp59
+S'626567696e'
+p60
+aS'UUencoded file'
+p61
+aa(lp62
+S'd4c3b2a1'
+p63
+aS'WinDump (winpcap) capture file'
+p64
+aa(lp65
+S'37e45396c9dbd607'
+p66
+aS'zisofs compressed file'
+p67
+aa(lp68
+S'00001a00051004'
+p69
+aS'Lotus 1-2-3 (v9)'
+p70
+aa(lp71
+S'4d5a'
+p72
+aS'Windows virtual device drivers'
+p73
+aa(lp74
+S'0000001466747970'
+p75
+aS'3GPP multimedia files'
+p76
+aa(lp77
+S'0000002066747970'
+p78
+aS'3GPP2 multimedia files'
+p79
+aa(lp80
+S'0000001866747970'
+p81
+aS'MPEG-4 video files'
+p82
+aa(lp83
+S'52494646'
+p84
+aS'4X Movie video'
+p85
+aa(lp86
+S'377abcaf271c'
+p87
+aS'7-Zip compressed file'
+p88
+aa(lp89
+S'00014241'
+p90
+aS'Palm Address Book Archive'
+p91
+aa(lp92
+S'41435344'
+p93
+aS'AOL parameter|info files'
+p94
+aa(lp95
+S'62706c697374'
+p96
+aS'Binary property list (plist)'
+p97
+aa(lp98
+S'001400000102'
+p99
+aS'BIOS details in RAM'
+p100
+aa(lp101
+S'3037303730'
+p102
+aS'cpio archive'
+p103
+aa(lp104
+S'7f454c46'
+p105
+aS'ELF executable'
+p106
+aa(lp107
+S'a1b2cd34'
+p108
+aS'Extended tcpdump (libpcap) capture file'
+p109
+aa(lp110
+S'04000000'
+p111
+aS'INFO2 Windows recycle bin_1'
+p112
+aa(lp113
+S'05000000'
+p114
+aS'INFO2 Windows recycle bin_2'
+p115
+aa(lp116
+S'aced'
+p117
+aS'Java serialization data'
+p118
+aa(lp119
+S'4b57414a88f027d1'
+p120
+aS'KWAJ (compressed) file'
+p121
+aa(lp122
+S'cd20aaaa02000000'
+p123
+aS'NAV quarantined virus file'
+p124
+aa(lp125
+S'535a2088f02733d1'
+p126
+aS'QBASIC SZDD file'
+p127
+aa(lp128
+S'6f3c'
+p129
+aS'SMS text (SIM)'
+p130
+aa(lp131
+S'535a444488f02733'
+p132
+aS'SZDD file format'
+p133
+aa(lp134
+S'a1b2c3d4'
+p135
+aS'tcpdump (libpcap) capture file'
+p136
+aa(lp137
+S'34cdb2a1'
+p138
+aS'Tcpdump capture file'
+p139
+aa(lp140
+S'efbbbf'
+p141
+aS'UTF8 file'
+p142
+aa(lp143
+S'feff'
+p144
+aS'UTF-16|UCS-2 file'
+p145
+aa(lp146
+S'fffe0000'
+p147
+aS'UTF-32|UCS-4 file'
+p148
+aa(lp149
+S'626567696e'
+p150
+aS'UUencoded file'
+p151
+aa(lp152
+S'd4c3b2a1'
+p153
+aS'WinDump (winpcap) capture file'
+p154
+aa(lp155
+S'37e45396c9dbd607'
+p156
+aS'zisofs compressed file'
+p157
+aa(lp158
+S'00001a00051004'
+p159
+aS'Lotus 1-2-3 (v9)'
+p160
+aa(lp161
+S'4d5a'
+p162
+aS'Windows virtual device drivers'
+p163
+aa(lp164
+S'0000001466747970'
+p165
+aS'3GPP multimedia files'
+p166
+aa(lp167
+S'0000002066747970'
+p168
+aS'3GPP2 multimedia files'
+p169
+aa(lp170
+S'0000001866747970'
+p171
+aS'MPEG-4 video files'
+p172
+aa(lp173
+S'52494646'
+p174
+aS'4X Movie video'
+p175
+aa(lp176
+S'377abcaf271c'
+p177
+aS'7-Zip compressed file'
+p178
+aa(lp179
+S'00014241'
+p180
+aS'Palm Address Book Archive'
+p181
+aa(lp182
+S'5157205665722e20'
+p183
+aS'ABD | QSD Quicken data file'
+p184
+aa(lp185
+S'414f4c494e444558'
+p186
+aS'AOL address book index'
+p187
+aa(lp188
+S'414f4c'
+p189
+aS'AOL config files'
+p190
+aa(lp191
+S'414f4c4442'
+p192
+aS'AOL address book'
+p193
+aa(lp194
+S'414f4c'
+p195
+aS'AOL config files'
+p196
+aa(lp197
+S'72696666'
+p198
+aS'Sonic Foundry Acid Music File'
+p199
+aa(lp200
+S'000100005374616e6461726420414345204442'
+p201
+aS'Microsoft Access 2007'
+p202
+aa(lp203
+S'4d5a'
+p204
+aS'MS audio compression manager driver'
+p205
+aa(lp206
+S'c3abcdab'
+p207
+aS'MS Agent Character file'
+p208
+aa(lp209
+S'd0cf11e0a1b11ae1'
+p210
+aS'CaseWare Working Papers'
+p211
+aa(lp212
+S'5245564e554d3a2c'
+p213
+aS'Antenna data file'
+p214
+aa(lp215
+S'444f53'
+p216
+aS'Amiga disk file'
+p217
+aa(lp218
+S'd0cf11e0a1b11ae1'
+p219
+aS'Access project file'
+p220
+aa(lp221
+S'0300000041505052'
+p222
+aS'Approach index file'
+p223
+aa(lp224
+S'80000020031204'
+p225
+aS'Dreamcast audio'
+p226
+aa(lp227
+S'464f524d00'
+p228
+aS'Audio Interchange File'
+p229
+aa(lp230
+S'2112'
+p231
+aS'AIN Compressed Archive'
+p232
+aa(lp233
+S'2321414d52'
+p234
+aS'Adaptive Multi-Rate ACELP Codec (GSM)'
+p235
+aa(lp236
+S'52494646'
+p237
+aS'Windows animated cursor'
+p238
+aa(lp239
+S'4d5a900003000000'
+p240
+aS'Acrobat plug-in'
+p241
+aa(lp242
+S'd0cf11e0a1b11ae1'
+p243
+aS'Lotus|IBM Approach 97 file'
+p244
+aa(lp245
+S'41724301'
+p246
+aS'FreeArc compressed file'
+p247
+aa(lp248
+S'1a02'
+p249
+aS'LH archive (old vers.|type 1)'
+p250
+aa(lp251
+S'1a03'
+p252
+aS'LH archive (old vers.|type 2)'
+p253
+aa(lp254
+S'1a04'
+p255
+aS'LH archive (old vers.|type 3)'
+p256
+aa(lp257
+S'1a08'
+p258
+aS'LH archive (old vers.|type 4)'
+p259
+aa(lp260
+S'1a09'
+p261
+aS'LH archive (old vers.|type 5)'
+p262
+aa(lp263
+S'60ea'
+p264
+aS'ARJ Compressed archive file'
+p265
+aa(lp266
+S'd42a'
+p267
+aS'AOL history|typed URL files'
+p268
+aa(lp269
+S'3026b2758e66cf11'
+p270
+aS'Windows Media Audio|Video File'
+p271
+aa(lp272
+S'5343486c'
+p273
+aS'Underground Audio'
+p274
+aa(lp275
+S'3c'
+p276
+aS'Advanced Stream Redirector'
+p277
+aa(lp278
+S'646e732e'
+p279
+aS'Audacity audio file'
+p280
+aa(lp281
+S'2e736e64'
+p282
+aS'NeXT|Sun Microsystems audio file'
+p283
+aa(lp284
+S'd42a'
+p285
+aS'AOL history|typed URL files'
+p286
+aa(lp287
+S'52494646'
+p288
+aS'Resource Interchange File Format'
+p289
+aa(lp290
+S'8a0109000000e108'
+p291
+aS'MS Answer Wizard'
+p292
+aa(lp293
+S'4d5a900003000000'
+p294
+aS'DirectShow filter'
+p295
+aa(lp296
+S'4d5a'
+p297
+aS'Library cache file'
+p298
+aa(lp299
+S'414f4c2046656564'
+p300
+aS'AOL and AIM buddy list'
+p301
+aa(lp302
+S'414f4c'
+p303
+aS'AOL config files'
+p304
+aa(lp305
+S'5854'
+p306
+aS'MS Publisher'
+p307
+aa(lp308
+S'424c4932323351'
+p309
+aS'Speedtouch router firmware'
+p310
+aa(lp311
+S'424d'
+p312
+aS'Bitmap image'
+p313
+aa(lp314
+S'425a68'
+p315
+aS'bzip2 compressed archive'
+p316
+aa(lp317
+S'49536328'
+p318
+aS'Install Shield compressed file'
+p319
+aa(lp320
+S'4d534346'
+p321
+aS'Microsoft cabinet file'
+p322
+aa(lp323
+S'737263646f636964'
+p324
+aS'CALS raster bitmap'
+p325
+aa(lp326
+S'537570657243616c'
+p327
+aS'SuperCalc worksheet'
+p328
+aa(lp329
+S'b5a2b0b3b3b0a5b5'
+p330
+aS'Windows calendar'
+p331
+aa(lp332
+S'58435000'
+p333
+aS'Packet sniffer files'
+p334
+aa(lp335
+S'52545353'
+p336
+aS'WinNT Netmon capture file'
+p337
+aa(lp338
+S'5f434153455f'
+p339
+aS'EnCase case file'
+p340
+aa(lp341
+S'30'
+p342
+aS'MS security catalog file'
+p343
+aa(lp344
+S'434246494c45'
+p345
+aS'WordPerfect dictionary'
+p346
+aa(lp347
+S'5f434153455f'
+p348
+aS'EnCase case file'
+p349
+aa(lp350
+S'52494646'
+p351
+aS'Resource Interchange File Format'
+p352
+aa(lp353
+S'52494646'
+p354
+aS'CorelDraw document'
+p355
+aa(lp356
+S'454c49544520436f'
+p357
+aS'Elite Plus Commander game file'
+p358
+aa(lp359
+S'4d535f564f494345'
+p360
+aS'Sony Compressed Voice File'
+p361
+aa(lp362
+S'5b666c7473696d2e'
+p363
+aS'Flight Simulator Aircraft Configuration'
+p364
+aa(lp365
+S'49545346'
+p366
+aS'MS Compiled HTML Help File'
+p367
+aa(lp368
+S'49545346'
+p369
+aS'MS Compiled HTML Help File'
+p370
+aa(lp371
+S'cafebabe'
+p372
+aS'Java bytecode'
+p373
+aa(lp374
+S'434f4d2b'
+p375
+aS'COM+ Catalog'
+p376
+aa(lp377
+S'434d5831'
+p378
+aS'Corel Binary metafile'
+p379
+aa(lp380
+S'52494646'
+p381
+aS'Corel Presentation Exchange metadata'
+p382
+aa(lp383
+S'53514c4f434f4e56'
+p384
+aS'DB2 conversion file'
+p385
+aa(lp386
+S'4e616d653a20'
+p387
+aS'Agent newsreader character map'
+p388
+aa(lp389
+S'4d5a'
+p390
+aS'Windows|DOS executable file'
+p391
+aa(lp392
+S'e8'
+p393
+aS'Windows executable file_1'
+p394
+aa(lp395
+S'e9'
+p396
+aS'Windows executable file_2'
+p397
+aa(lp398
+S'eb'
+p399
+aS'Windows executable file_3'
+p400
+aa(lp401
+S'464158434f564552'
+p402
+aS'MS Fax Cover Sheet'
+p403
+aa(lp404
+S'53494554524f4e49'
+p405
+aS'Sietronics CPI XRD document'
+p406
+aa(lp407
+S'ff464f4e54'
+p408
+aS'Windows international code page'
+p409
+aa(lp410
+S'4d5a'
+p411
+aS'Control panel application'
+p412
+aa(lp413
+S'dcdc'
+p414
+aS'Corel color palette'
+p415
+aa(lp416
+S'4350543746494c45'
+p417
+aS'Corel Photopaint file_1'
+p418
+aa(lp419
+S'43505446494c45'
+p420
+aS'Corel Photopaint file_2'
+p421
+aa(lp422
+S'5b57696e646f7773'
+p423
+aS'Microsoft Code Page Translation file'
+p424
+aa(lp425
+S'43525553482076'
+p426
+aS'Crush compressed archive'
+p427
+aa(lp428
+S'49491a0000004845'
+p429
+aS'Canon RAW file'
+p430
+aa(lp431
+S'6375736800000002'
+p432
+aS'Photoshop Custom Shape'
+p433
+aa(lp434
+S'436174616c6f6720'
+p435
+aS'WhereIsIt Catalog'
+p436
+aa(lp437
+S'56455253494f4e20'
+p438
+aS'Visual Basic User-defined Control file'
+p439
+aa(lp440
+S'504b0304'
+p441
+aS'Customization files'
+p442
+aa(lp443
+S'00000200'
+p444
+aS'Windows cursor'
+p445
+aa(lp446
+S'52494646'
+p447
+aS'Video CD MPEG movie'
+p448
+aa(lp449
+S'a90d000000000000'
+p450
+aS'Access Data FTK evidence'
+p451
+aa(lp452
+S'736c6821'
+p453
+aS'Allegro Generic Packfile (compressed)'
+p454
+aa(lp455
+S'736c682e'
+p456
+aS'Allegro Generic Packfile (uncompressed)'
+p457
+aa(lp458
+S'415647365f496e74'
+p459
+aS'AVG6 Integrity database'
+p460
+aa(lp461
+S'03'
+p462
+aS'MapInfo Native Data Format'
+p463
+aa(lp464
+S'4552465353415645'
+p465
+aS'EasyRecovery Saved State file'
+p466
+aa(lp467
+S'436c69656e742055'
+p468
+aS'IE History file'
+p469
+aa(lp470
+S'496e6e6f20536574'
+p471
+aS'Inno Setup Uninstall Log'
+p472
+aa(lp473
+S'504e4349554e444f'
+p474
+aS'Norton Disk Doctor undo file'
+p475
+aa(lp476
+S'50455354'
+p477
+aS'PestPatrol data|scan strings'
+p478
+aa(lp479
+S'1a52545320434f4d'
+p480
+aS'Runtime Software disk image'
+p481
+aa(lp482
+S'52415a4154444231'
+p483
+aS'Shareaza (P2P) thumbnail'
+p484
+aa(lp485
+S'4e41565452414646'
+p486
+aS'TomTom traffic data'
+p487
+aa(lp488
+S'55464f4f72626974'
+p489
+aS'UFO Capture map file'
+p490
+aa(lp491
+S'574d4d50'
+p492
+aS'Walkman MP3 file'
+p493
+aa(lp494
+S'43524547'
+p495
+aS'Win9x registry hive'
+p496
+aa(lp497
+S'72656766'
+p498
+aS'WinNT registry file'
+p499
+aa(lp500
+S'd0cf11e0a1b11ae1'
+p501
+aS'MSWorks database file'
+p502
+aa(lp503
+S'08'
+p504
+aS'dBASE IV or dBFast configuration file'
+p505
+aa(lp506
+S'0006156100000002000004d200001000'
+p507
+aS'Netscape Navigator (v4) database'
+p508
+aa(lp509
+S'44424648'
+p510
+aS'Palm Zire photo database'
+p511
+aa(lp512
+S'53514c69746520666f726d6174203300'
+p513
+aS'SQLite database file'
+p514
+aa(lp515
+S'fdffffff'
+p516
+aS'Thumbs.db subheader'
+p517
+aa(lp518
+S'03'
+p519
+aS'dBASE III file'
+p520
+aa(lp521
+S'04'
+p522
+aS'dBASE IV file'
+p523
+aa(lp524
+S'00014244'
+p525
+aS'Palm DateBook Archive'
+p526
+aa(lp527
+S'6c33336c'
+p528
+aS'Skype user data file'
+p529
+aa(lp530
+S'4f504c4461746162'
+p531
+aS'Psion Series 3 Database'
+p532
+aa(lp533
+S'cfad12fe'
+p534
+aS'Outlook Express e-mail folder'
+p535
+aa(lp536
+S'3c21646f63747970'
+p537
+aS'AOL HTML mail'
+p538
+aa(lp539
+S'b168de3a'
+p540
+aS'PCX bitmap'
+p541
+aa(lp542
+S'6465780a30303900'
+p543
+aS'Dalvik (Android) executable file'
+p544
+aa(lp545
+S'424d'
+p546
+aS'Bitmap image'
+p547
+aa(lp548
+S'4d5a'
+p549
+aS'Windows|DOS executable file'
+p550
+aa(lp551
+S'78'
+p552
+aS'MacOS X image file'
+p553
+aa(lp554
+S'4d444d5093a7'
+p555
+aS'Windows dump file'
+p556
+aa(lp557
+S'504147454455'
+p558
+aS'Windows memory dump'
+p559
+aa(lp560
+S'444d5321'
+p561
+aS'Amiga DiskMasher compressed archive'
+p562
+aa(lp563
+S'd0cf11e0a1b11ae1'
+p564
+aS'Microsoft Office document'
+p565
+aa(lp566
+S'0d444f43'
+p567
+aS'DeskMate Document'
+p568
+aa(lp569
+S'cf11e0a1b11ae100'
+p570
+aS'Perfect Office document'
+p571
+aa(lp572
+S'dba52d00'
+p573
+aS'Word 2.0 file'
+p574
+aa(lp575
+S'eca5c100'
+p576
+aS'Word document subheader'
+p577
+aa(lp578
+S'504b0304'
+p579
+aS'MS Office Open XML Format Document'
+p580
+aa(lp581
+S'504b030414000600'
+p582
+aS'MS Office 2007 documents'
+p583
+aa(lp584
+S'd0cf11e0a1b11ae1'
+p585
+aS'Microsoft Office document'
+p586
+aa(lp587
+S'4d5a'
+p588
+aS'Windows|DOS executable file'
+p589
+aa(lp590
+S'07'
+p591
+aS'Generic drawing programs'
+p592
+aa(lp593
+S'01ff02040302'
+p594
+aS'Micrografx vector graphic file'
+p595
+aa(lp596
+S'52494646'
+p597
+aS'Micrografx Designer graphic'
+p598
+aa(lp599
+S'4d56'
+p600
+aS'CD Stomper Pro label file'
+p601
+aa(lp602
+S'23204d6963726f73'
+p603
+aS'MS Developer Studio project file'
+p604
+aa(lp605
+S'02647373'
+p606
+aS'Digital Speech Standard file'
+p607
+aa(lp608
+S'64737766696c65'
+p609
+aS'MS Visual Studio workspace file'
+p610
+aa(lp611
+S'0764743264647464'
+p612
+aS'DesignTools 2D Design file'
+p613
+aa(lp614
+S'5b50686f6e655d'
+p615
+aS'Dial-up networking file'
+p616
+aa(lp617
+S'4d535f564f494345'
+p618
+aS'Sony Compressed Voice File'
+p619
+aa(lp620
+S'445644'
+p621
+aS'DVR-Studio stream file'
+p622
+aa(lp623
+S'4f7b'
+p624
+aS'Visio|DisplayWrite 4 text file'
+p625
+aa(lp626
+S'41433130'
+p627
+aS'Generic AutoCAD drawing'
+p628
+aa(lp629
+S'455646090d0aff00'
+p630
+aS'Expert Witness Compression Format'
+p631
+aa(lp632
+S'4c5646090d0aff00'
+p633
+aS'Logical File Evidence Format'
+p634
+aa(lp635
+S'5b47656e6572616c'
+p636
+aS'MS Exchange configuration file'
+p637
+aa(lp638
+S'dcfe'
+p639
+aS'eFax file'
+p640
+aa(lp641
+S'582d'
+p642
+aS'Exchange e-mail'
+p643
+aa(lp644
+S'52657475726e2d50'
+p645
+aS'Generic e-mail_1'
+p646
+aa(lp647
+S'46726f6d'
+p648
+aS'Generic e-mail_2'
+p649
+aa(lp650
+S'40404020000040404040'
+p651
+aS'EndNote Library File'
+p652
+aa(lp653
+S'c5d0d3c6'
+p654
+aS'Adobe encapsulated PostScript'
+p655
+aa(lp656
+S'252150532d41646f'
+p657
+aS'Encapsulated PostScript file'
+p658
+aa(lp659
+S'1a350100'
+p660
+aS'WinPharoah capture file'
+p661
+aa(lp662
+S'300000004c664c65'
+p663
+aS'Windows Event Viewer file'
+p664
+aa(lp665
+S'456c6646696c6500'
+p666
+aS'Windows Vista event log'
+p667
+aa(lp668
+S'4d5a'
+p669
+aS'Windows|DOS executable file'
+p670
+aa(lp671
+S'25504446'
+p672
+aS'PDF file'
+p673
+aa(lp674
+S'664c614300000022'
+p675
+aS'Free Lossless Audio Codec file'
+p676
+aa(lp677
+S'0011'
+p678
+aS'FLIC animation'
+p679
+aa(lp680
+S'4d5a900003000000'
+p681
+aS'Audition graphic filter'
+p682
+aa(lp683
+S'76323030332e3130'
+p684
+aS'Qimage filter'
+p685
+aa(lp686
+S'464c56'
+p687
+aS'Flash video file'
+p688
+aa(lp689
+S'3c4d616b65724669'
+p690
+aS'Adobe FrameMaker'
+p691
+aa(lp692
+S'4d5a'
+p693
+aS'Font file'
+p694
+aa(lp695
+S'd20a0000'
+p696
+aS'WinPharoah filter file'
+p697
+aa(lp698
+S'feef'
+p699
+aS'Symantex Ghost image file'
+p700
+aa(lp701
+S'feef'
+p702
+aS'Symantex Ghost image file'
+p703
+aa(lp704
+S'3f5f0300'
+p705
+aS'Windows Help file_2'
+p706
+aa(lp707
+S'4c4e0200'
+p708
+aS'Windows help file_3'
+p709
+aa(lp710
+S'47494638'
+p711
+aS'GIF file'
+p712
+aa(lp713
+S'99'
+p714
+aS'GPG public keyring'
+p715
+aa(lp716
+S'504d4343'
+p717
+aS'Windows Program Manager group file'
+p718
+aa(lp719
+S'475832'
+p720
+aS'Show Partner graphics file'
+p721
+aa(lp722
+S'1f8b08'
+p723
+aS'GZIP archive file'
+p724
+aa(lp725
+S'91334846'
+p726
+aS'Hamarsoft compressed archive'
+p727
+aa(lp728
+S'4d444d5093a7'
+p729
+aS'Windows dump file'
+p730
+aa(lp731
+S'49536328'
+p732
+aS'Install Shield compressed file'
+p733
+aa(lp734
+S'233f52414449414e'
+p735
+aS'Radiance High Dynamic Range image file'
+p736
+aa(lp737
+S'48695021'
+p738
+aS'Houdini image file. Three-dimensional modeling and animation'
+p739
+aa(lp740
+S'0000ffffffff'
+p741
+aS'Windows Help file_1'
+p742
+aa(lp743
+S'3f5f0300'
+p744
+aS'Windows Help file_2'
+p745
+aa(lp746
+S'4c4e0200'
+p747
+aS'Windows help file_3'
+p748
+aa(lp749
+S'2854686973206669'
+p750
+aS'BinHex 4 Compressed Archive'
+p751
+aa(lp752
+S'00000100'
+p753
+aS'Windows icon|printer spool file'
+p754
+aa(lp755
+S'414f4c4442'
+p756
+aS'AOL user configuration'
+p757
+aa(lp758
+S'414f4c'
+p759
+aS'AOL config files'
+p760
+aa(lp761
+S'5000000020000000'
+p762
+aS'Quicken QuickFinder Information File'
+p763
+aa(lp764
+S'445644'
+p765
+aS'DVD info file'
+p766
+aa(lp767
+S'504943540008'
+p768
+aS'ChromaGraph Graphics Card Bitmap'
+p769
+aa(lp770
+S'eb3c902a'
+p771
+aS'GEM Raster file'
+p772
+aa(lp773
+S'53434d49'
+p774
+aS'Img Software Bitmap'
+p775
+aa(lp776
+S'414f4c494458'
+p777
+aS'AOL client preferences|settings file'
+p778
+aa(lp779
+S'414f4c'
+p780
+aS'AOL config files'
+p781
+aa(lp782
+S'e310000100000000'
+p783
+aS'Amiga icon'
+p784
+aa(lp785
+S'5468697320697320'
+p786
+aS'GNU Info Reader file'
+p787
+aa(lp788
+S'7a626578'
+p789
+aS'ZoomBrowser Image Index'
+p790
+aa(lp791
+S'4344303031'
+p792
+aS'ISO-9660 CD Disc Image'
+p793
+aa(lp794
+S'2e524543'
+p795
+aS'RealPlayer video file (V11+)'
+p796
+aa(lp797
+S'504b0304'
+p798
+aS'Java archive_1'
+p799
+aa(lp800
+S'5f27a889'
+p801
+aS'Jar archive'
+p802
+aa(lp803
+S'4a4152435300'
+p804
+aS'JARCS compressed archive'
+p805
+aa(lp806
+S'504b030414000800'
+p807
+aS'Java archive_2'
+p808
+aa(lp809
+S'ffd8ffe0'
+p810
+aS'JPEG IMAGE'
+p811
+aa(lp812
+S'ffd8ffe0'
+p813
+aS'JFIF IMAGE FILE - jpeg'
+p814
+aa(lp815
+S'4a47030e'
+p816
+aS'AOL ART file_1'
+p817
+aa(lp818
+S'4a47040e'
+p819
+aS'AOL ART file_2'
+p820
+aa(lp821
+S'4e422a00'
+p822
+aS'MS Windows journal'
+p823
+aa(lp824
+S'0000000c6a502020'
+p825
+aS'JPEG2000 image files'
+p826
+aa(lp827
+S'ffd8ffe0'
+p828
+aS'JPEG IMAGE'
+p829
+aa(lp830
+S'ffd8ffe0'
+p831
+aS'JPE IMAGE FILE - jpeg'
+p832
+aa(lp833
+S'ffd8ffe0'
+p834
+aS'JPEG IMAGE'
+p835
+aa(lp836
+S'ffd8ffe2'
+p837
+aS'CANNON EOS JPEG FILE'
+p838
+aa(lp839
+S'ffd8ffe3'
+p840
+aS'SAMSUNG D500 JPEG FILE'
+p841
+aa(lp842
+S'ffd8ffe0'
+p843
+aS'JPEG IMAGE'
+p844
+aa(lp845
+S'ffd8ffe1'
+p846
+aS'Digital camera JPG using Exchangeable Image File Format (EXIF)'
+p847
+aa(lp848
+S'ffd8ffe8'
+p849
+aS'Still Picture Interchange File Format (SPIFF)'
+p850
+aa(lp851
+S'4e422a00'
+p852
+aS'MS Windows journal'
+p853
+aa(lp854
+S'4b47425f61726368'
+p855
+aS'KGB archive'
+p856
+aa(lp857
+S'49443303000000'
+p858
+aS'Sprint Music Store audio'
+p859
+aa(lp860
+S'504b0304'
+p861
+aS'KWord document'
+p862
+aa(lp863
+S'c8007900'
+p864
+aS'Jeppesen FliteLog file'
+p865
+aa(lp866
+S'7b0d0a6f20'
+p867
+aS'Windows application log'
+p868
+aa(lp869
+S'7b0d0a6f20'
+p870
+aS'Windows application log'
+p871
+aa(lp872
+S'2d6c68'
+p873
+aS'Compressed archive'
+p874
+aa(lp875
+S'213c617263683e0a'
+p876
+aS'Unix archiver (ar)|MS Program Library Common Object File Format (COFF)'
+p877
+aa(lp878
+S'49544f4c49544c53'
+p879
+aS'MS Reader eBook'
+p880
+aa(lp881
+S'4c00000001140200'
+p882
+aS'Windows shortcut file'
+p883
+aa(lp884
+S'2a2a2a2020496e73'
+p885
+aS'Symantec Wise Installer log'
+p886
+aa(lp887
+S'576f726450726f'
+p888
+aS'Lotus WordPro file'
+p889
+aa(lp890
+S'2d6c68'
+p891
+aS'Compressed archive'
+p892
+aa(lp893
+S'00000020667479704d3441'
+p894
+aS'Apple audio and video files'
+p895
+aa(lp896
+S'3c3f786d6c2076657273696f6e3d'
+p897
+aS'Windows Visual Stylesheet'
+p898
+aa(lp899
+S'4d41723000'
+p900
+aS'MAr compressed archive'
+p901
+aa(lp902
+S'4d415243'
+p903
+aS'Microsoft|MSN MARC archive'
+p904
+aa(lp905
+S'4d41523100'
+p906
+aS'Mozilla archive'
+p907
+aa(lp908
+S'000100005374616e64617264204a6574204442'
+p909
+aS'Microsoft Access'
+p910
+aa(lp911
+S'010f0000'
+p912
+aS'SQL Data Base'
+p913
+aa(lp914
+S'4550'
+p915
+aS'MS Document Imaging file'
+p916
+aa(lp917
+S'4d546864'
+p918
+aS'MIDI sound file'
+p919
+aa(lp920
+S'4d546864'
+p921
+aS'MIDI sound file'
+p922
+aa(lp923
+S'3c4d616b65724669'
+p924
+aS'Adobe FrameMaker'
+p925
+aa(lp926
+S'56657273696f6e20'
+p927
+aS'MapInfo Interchange Format file'
+p928
+aa(lp929
+S'1a45dfa393428288'
+p930
+aS'Matroska stream file'
+p931
+aa(lp932
+S'4d494c4553'
+p933
+aS'Milestones project management file'
+p934
+aa(lp935
+S'4d56323134'
+p936
+aS'Milestones project management file_1'
+p937
+aa(lp938
+S'4d563243'
+p939
+aS'Milestones project management file_2'
+p940
+aa(lp941
+S'4d4c5357'
+p942
+aS'Skype localization data file'
+p943
+aa(lp944
+S'4d4d4d440000'
+p945
+aS'Yamaha Synthetic music Mobile Application Format'
+p946
+aa(lp947
+S'000100004d534953414d204461746162617365'
+p948
+aS'Microsoft Money file'
+p949
+aa(lp950
+S'fffe23006c006900'
+p951
+aS'MSinfo file'
+p952
+aa(lp953
+S'6d6f6f76'
+p954
+aS'QuickTime movie_1'
+p955
+aa(lp956
+S'66726565'
+p957
+aS'QuickTime movie_2'
+p958
+aa(lp959
+S'6d646174'
+p960
+aS'QuickTime movie_3'
+p961
+aa(lp962
+S'77696465'
+p963
+aS'QuickTime movie_4'
+p964
+aa(lp965
+S'706e6f74'
+p966
+aS'QuickTime movie_5'
+p967
+aa(lp968
+S'736b6970'
+p969
+aS'QuickTime movie_6'
+p970
+aa(lp971
+S'0ced'
+p972
+aS'Monochrome Picture TIFF bitmap'
+p973
+aa(lp974
+S'494433'
+p975
+aS'MP3 audio file'
+p976
+aa(lp977
+S'000001ba'
+p978
+aS'DVD video file'
+p979
+aa(lp980
+S'000001b3'
+p981
+aS'MPEG video file'
+p982
+aa(lp983
+S'd0cf11e0a1b11ae1'
+p984
+aS'Microsoft Common Console Document'
+p985
+aa(lp986
+S'3c3f786d6c2076657273696f6e3d22312e30223f3e0d0a3c4d4d435f436f6e736f6c6546696c6520436f6e736f6c65566572'
+p987
+aS'MMC Snap-in Control file'
+p988
+aa(lp989
+S'd0cf11e0a1b11ae1'
+p990
+aS'Microsoft Installer package'
+p991
+aa(lp992
+S'2320'
+p993
+aS'Cerius2 file'
+p994
+aa(lp995
+S'4d535f564f494345'
+p996
+aS'Sony Compressed Voice File'
+p997
+aa(lp998
+S'd0cf11e0a1b11ae1'
+p999
+aS'Minitab data file'
+p1000
+aa(lp1001
+S'0e4e65726f49534f'
+p1002
+aS'Nero CD compilation'
+p1003
+aa(lp1004
+S'1a0000040000'
+p1005
+aS'Lotus Notes database'
+p1006
+aa(lp1007
+S'4e45534d1a01'
+p1008
+aS'NES Sound file'
+p1009
+aa(lp1010
+S'1a0000'
+p1011
+aS'Lotus Notes database template'
+p1012
+aa(lp1013
+S'4e49544630'
+p1014
+aS'National Imagery Transmission Format file'
+p1015
+aa(lp1016
+S'30314f52444e414e'
+p1017
+aS'National Transfer Format Map'
+p1018
+aa(lp1019
+S'4d52564e'
+p1020
+aS'VMware BIOS state file'
+p1021
+aa(lp1022
+S'4c01'
+p1023
+aS'MS COFF relocatable object code'
+p1024
+aa(lp1025
+S'80'
+p1026
+aS'Relocatable object code'
+p1027
+aa(lp1028
+S'4d5a'
+p1029
+aS'ActiveX|OLE Custom Control'
+p1030
+aa(lp1031
+S'504b0304'
+p1032
+aS'OpenDocument template'
+p1033
+aa(lp1034
+S'504b0304'
+p1035
+aS'OpenDocument template'
+p1036
+aa(lp1037
+S'4f67675300020000'
+p1038
+aS'Ogg Vorbis Codec compressed file'
+p1039
+aa(lp1040
+S'4f67675300020000'
+p1041
+aS'Ogg Vorbis Codec compressed file'
+p1042
+aa(lp1043
+S'4f67675300020000'
+p1044
+aS'Ogg Vorbis Codec compressed file'
+p1045
+aa(lp1046
+S'4f67675300020000'
+p1047
+aS'Ogg Vorbis Codec compressed file'
+p1048
+aa(lp1049
+S'4d5a'
+p1050
+aS'OLE object library'
+p1051
+aa(lp1052
+S'e4525c7b8cd8a74d'
+p1053
+aS'MS OneNote note'
+p1054
+aa(lp1055
+S'd0cf11e0a1b11ae1'
+p1056
+aS'Developer Studio File Options file'
+p1057
+aa(lp1058
+S'fdffffff20'
+p1059
+aS'Developer Studio subheader'
+p1060
+aa(lp1061
+S'414f4c564d313030'
+p1062
+aS'AOL personal file cabinet'
+p1063
+aa(lp1064
+S'504b0304'
+p1065
+aS'OpenDocument template'
+p1066
+aa(lp1067
+S'64000000'
+p1068
+aS'Intel PROset|Wireless Profile'
+p1069
+aa(lp1070
+S'1a0b'
+p1071
+aS'PAK Compressed archive file'
+p1072
+aa(lp1073
+S'5041434b'
+p1074
+aS'Quake archive file'
+p1075
+aa(lp1076
+S'47504154'
+p1077
+aS'GIMP pattern file'
+p1078
+aa(lp1079
+S'504158'
+p1080
+aS'PAX password protected bitmap'
+p1081
+aa(lp1082
+S'564350434830'
+p1083
+aS'Visual C PreCompiled header'
+p1084
+aa(lp1085
+S'0a020101'
+p1086
+aS'ZSOFT Paintbrush file_1'
+p1087
+aa(lp1088
+S'0a030101'
+p1089
+aS'ZSOFT Paintbrush file_2'
+p1090
+aa(lp1091
+S'0a050101'
+p1092
+aS'ZSOFT Paintbrush file_3'
+p1093
+aa(lp1094
+S'aced000573720012'
+p1095
+aS'BGBlitz position database file'
+p1096
+aa(lp1097
+S'4d2d5720506f636b'
+p1098
+aS'Merriam-Webster Pocket Dictionary'
+p1099
+aa(lp1100
+S'4d6963726f736f667420432f432b2b20'
+p1101
+aS'MS C++ debugging symbols file'
+p1102
+aa(lp1103
+S'736d5f'
+p1104
+aS'PalmOS SuperMemo'
+p1105
+aa(lp1106
+S'737a657a'
+p1107
+aS'PowerBASIC Debugger Symbols'
+p1108
+aa(lp1109
+S'25504446'
+p1110
+aS'PDF file'
+p1111
+aa(lp1112
+S'1100000053434341'
+p1113
+aS'Windows prefetch file'
+p1114
+aa(lp1115
+S'414f4c'
+p1116
+aS'AOL config files'
+p1117
+aa(lp1118
+S'414f4c564d313030'
+p1119
+aS'AOL personal file cabinet'
+p1120
+aa(lp1121
+S'504750644d41494e'
+p1122
+aS'PGP disk image'
+p1123
+aa(lp1124
+S'50350a'
+p1125
+aS'Portable Graymap Graphic'
+p1126
+aa(lp1127
+S'4d5a'
+p1128
+aS'Windows|DOS executable file'
+p1129
+aa(lp1130
+S'9901'
+p1131
+aS'PGP public keyring'
+p1132
+aa(lp1133
+S'89504e470d0a1a0a'
+p1134
+aS'PNG image'
+p1135
+aa(lp1136
+S'd0cf11e0a1b11ae1'
+p1137
+aS'Microsoft Office document'
+p1138
+aa(lp1139
+S'd0cf11e0a1b11ae1'
+p1140
+aS'Microsoft Office document'
+p1141
+aa(lp1142
+S'006e1ef0'
+p1143
+aS'PowerPoint presentation subheader_1'
+p1144
+aa(lp1145
+S'0f00e803'
+p1146
+aS'PowerPoint presentation subheader_2'
+p1147
+aa(lp1148
+S'a0461df0'
+p1149
+aS'PowerPoint presentation subheader_3'
+p1150
+aa(lp1151
+S'fdffffff0e000000'
+p1152
+aS'PowerPoint presentation subheader_4'
+p1153
+aa(lp1154
+S'fdffffff1c000000'
+p1155
+aS'PowerPoint presentation subheader_5'
+p1156
+aa(lp1157
+S'fdffffff43000000'
+p1158
+aS'PowerPoint presentation subheader_6'
+p1159
+aa(lp1160
+S'504b0304'
+p1161
+aS'MS Office Open XML Format Document'
+p1162
+aa(lp1163
+S'504b030414000600'
+p1164
+aS'MS Office 2007 documents'
+p1165
+aa(lp1166
+S'4d534346'
+p1167
+aS'Powerpoint Packaged Presentation'
+p1168
+aa(lp1169
+S'424f4f4b4d4f4249'
+p1170
+aS'Palmpilot resource file'
+p1171
+aa(lp1172
+S'74424d504b6e5772'
+p1173
+aS'PathWay Map file'
+p1174
+aa(lp1175
+S'38425053'
+p1176
+aS'Photoshop image'
+p1177
+aa(lp1178
+S'7e424b00'
+p1179
+aS'Corel Paint Shop Pro image'
+p1180
+aa(lp1181
+S'd0cf11e0a1b11ae1'
+p1182
+aS'MS Publisher file'
+p1183
+aa(lp1184
+S'7b5c707769'
+p1185
+aS'MS WinMobile personal note'
+p1186
+aa(lp1187
+S'b04d4643'
+p1188
+aS'Win95 password file'
+p1189
+aa(lp1190
+S'e3828596'
+p1191
+aS'Win98 password file'
+p1192
+aa(lp1193
+S'458600000600'
+p1194
+aS'QuickBooks backup'
+p1195
+aa(lp1196
+S'52494646'
+p1197
+aS'Resource Interchange File Format'
+p1198
+aa(lp1199
+S'ac9ebd8f0000'
+p1200
+aS'QDF Quicken data'
+p1201
+aa(lp1202
+S'51454c20'
+p1203
+aS'QDL Quicken data'
+p1204
+aa(lp1205
+S'514649'
+p1206
+aS'Qcow Disk Image'
+p1207
+aa(lp1208
+S'03000000'
+p1209
+aS'Quicken price history'
+p1210
+aa(lp1211
+S'5157205665722e20'
+p1212
+aS'ABD | QSD Quicken data file'
+p1213
+aa(lp1214
+S'4d5a'
+p1215
+aS'Windows|DOS executable file'
+p1216
+aa(lp1217
+S'4d5a'
+p1218
+aS'Windows|DOS executable file'
+p1219
+aa(lp1220
+S'00004949585052'
+p1221
+aS'Quark Express (Intel)'
+p1222
+aa(lp1223
+S'00004d4d585052'
+p1224
+aS'Quark Express (Motorola)'
+p1225
+aa(lp1226
+S'2e524d4600000012'
+p1227
+aS'RealAudio file'
+p1228
+aa(lp1229
+S'2e7261fd00'
+p1230
+aS'RealAudio streaming media'
+p1231
+aa(lp1232
+S'727473703a2f2f'
+p1233
+aS'RealMedia metafile'
+p1234
+aa(lp1235
+S'526172211a0700'
+p1236
+aS'WinRAR compressed archive'
+p1237
+aa(lp1238
+S'fffe'
+p1239
+aS'Windows Registry file'
+p1240
+aa(lp1241
+S'52454745444954'
+p1242
+aS'WinNT Registry|Registry Undo files'
+p1243
+aa(lp1244
+S'01da01010003'
+p1245
+aS'Silicon Graphics RGB Bitmap'
+p1246
+aa(lp1247
+S'2e524d46'
+p1248
+aS'RealMedia streaming media'
+p1249
+aa(lp1250
+S'52494646'
+p1251
+aS'Resource Interchange File Format'
+p1252
+aa(lp1253
+S'2e524d46'
+p1254
+aS'RealMedia streaming media'
+p1255
+aa(lp1256
+S'edabeedb'
+p1257
+aS'RedHat Package Manager'
+p1258
+aa(lp1259
+S'43232b44a4434da5'
+p1260
+aS'RagTime document'
+p1261
+aa(lp1262
+S'7b5c72746631'
+p1263
+aS'RTF file'
+p1264
+aa(lp1265
+S'd0cf11e0a1b11ae1'
+p1266
+aS'Revit Project file'
+p1267
+aa(lp1268
+S'5b5645525d'
+p1269
+aS'Lotus AMI Pro document_1'
+p1270
+aa(lp1271
+S'5b7665725d'
+p1272
+aS'Lotus AMI Pro document_2'
+p1273
+aa(lp1274
+S'24464c3240282329'
+p1275
+aS'SPSS Data file'
+p1276
+aa(lp1277
+S'4d5a'
+p1278
+aS'Screen saver'
+p1279
+aa(lp1280
+S'534d415254445257'
+p1281
+aS'SmartDraw Drawing file'
+p1282
+aa(lp1283
+S'4848474231'
+p1284
+aS'Harvard Graphics presentation file'
+p1285
+aa(lp1286
+S'68490000'
+p1287
+aS'Win Server 2003 printer spool file'
+p1288
+aa(lp1289
+S'4b490000'
+p1290
+aS'Win9x printer spool file'
+p1291
+aa(lp1292
+S'67490000'
+p1293
+aS'Win2000|XP printer spool file'
+p1294
+aa(lp1295
+S'66490000'
+p1296
+aS'WinNT printer spool file'
+p1297
+aa(lp1298
+S'53484f57'
+p1299
+aS'Harvard Graphics presentation'
+p1300
+aa(lp1301
+S'5349542100'
+p1302
+aS'StuffIt archive'
+p1303
+aa(lp1304
+S'5374756666497420'
+p1305
+aS'StuffIt compressed archive'
+p1306
+aa(lp1307
+S'07534b46'
+p1308
+aS'SkinCrafter skin'
+p1309
+aa(lp1310
+S'9500'
+p1311
+aS'PGP secret keyring_1'
+p1312
+aa(lp1313
+S'9501'
+p1314
+aS'PGP secret keyring_2'
+p1315
+aa(lp1316
+S'414376'
+p1317
+aS'Steganos virtual secure drive'
+p1318
+aa(lp1319
+S'3a56455253494f4e'
+p1320
+aS'Surfplan kite project file'
+p1321
+aa(lp1322
+S'4d6963726f736f66742056697375616c'
+p1323
+aS'Visual Studio .NET file'
+p1324
+aa(lp1325
+S'001e849000000000'
+p1326
+aS'Netscape Communicator (v4) mail folder'
+p1327
+aa(lp1328
+S'4d534346'
+p1329
+aS'MS Access Snapshot Viewer file'
+p1330
+aa(lp1331
+S'd0cf11e0a1b11ae1'
+p1332
+aS'Visual Studio Solution User Options file'
+p1333
+aa(lp1334
+S'00000100'
+p1335
+aS'Windows icon|printer spool file'
+p1336
+aa(lp1337
+S'd0cf11e0a1b11ae1'
+p1338
+aS'SPSS output file'
+p1339
+aa(lp1340
+S'52454745444954'
+p1341
+aS'WinNT Registry|Registry Undo files'
+p1342
+aa(lp1343
+S'fdffffff04'
+p1344
+aS'Visual Studio Solution subheader'
+p1345
+aa(lp1346
+S'435753'
+p1347
+aS'Shockwave Flash file'
+p1348
+aa(lp1349
+S'465753'
+p1350
+aS'Shockwave Flash player'
+p1351
+aa(lp1352
+S'504b0304'
+p1353
+aS'StarOffice spreadsheet'
+p1354
+aa(lp1355
+S'504b0304'
+p1356
+aS'OpenOffice documents'
+p1357
+aa(lp1358
+S'504b0304'
+p1359
+aS'OpenOffice documents'
+p1360
+aa(lp1361
+S'504b0304'
+p1362
+aS'OpenOffice documents'
+p1363
+aa(lp1364
+S'4d5a'
+p1365
+aS'Windows|DOS executable file'
+p1366
+aa(lp1367
+S'ffffffff'
+p1368
+aS'DOS system driver'
+p1369
+aa(lp1370
+S'ff4b455942202020'
+p1371
+aS'Keyboard driver file'
+p1372
+aa(lp1373
+S'e8'
+p1374
+aS'Windows executable file_1'
+p1375
+aa(lp1376
+S'e9'
+p1377
+aS'Windows executable file_2'
+p1378
+aa(lp1379
+S'eb'
+p1380
+aS'Windows executable file_3'
+p1381
+aa(lp1382
+S'ff'
+p1383
+aS'Windows executable'
+p1384
+aa(lp1385
+S'414d594f'
+p1386
+aS'Harvard Graphics symbol graphic'
+p1387
+aa(lp1388
+S'7573746172'
+p1389
+aS'Tape Archive'
+p1390
+aa(lp1391
+S'425a68'
+p1392
+aS'bzip2 compressed archive'
+p1393
+aa(lp1394
+S'1f9d90'
+p1395
+aS'Compressed tape archive_1'
+p1396
+aa(lp1397
+S'1fa0'
+p1398
+aS'Compressed tape archive_2'
+p1399
+aa(lp1400
+S'425a68'
+p1401
+aS'bzip2 compressed archive'
+p1402
+aa(lp1403
+S'425a68'
+p1404
+aS'bzip2 compressed archive'
+p1405
+aa(lp1406
+S'b46e6844'
+p1407
+aS'Acronis True Image'
+p1408
+aa(lp1409
+S'492049'
+p1410
+aS'TIFF file_1'
+p1411
+aa(lp1412
+S'49492a00'
+p1413
+aS'TIFF file_2'
+p1414
+aa(lp1415
+S'4d4d002a'
+p1416
+aS'TIFF file_3'
+p1417
+aa(lp1418
+S'4d4d002b'
+p1419
+aS'TIFF file_4'
+p1420
+aa(lp1421
+S'492049'
+p1422
+aS'TIFF file_1'
+p1423
+aa(lp1424
+S'49492a00'
+p1425
+aS'TIFF file_2'
+p1426
+aa(lp1427
+S'4d4d002a'
+p1428
+aS'TIFF file_3'
+p1429
+aa(lp1430
+S'4d4d002b'
+p1431
+aS'TIFF file_4'
+p1432
+aa(lp1433
+S'4d53465402000100'
+p1434
+aS'OLE|SPSS|Visual C++ library file'
+p1435
+aa(lp1436
+S'0110'
+p1437
+aS'Novell LANalyzer capture file'
+p1438
+aa(lp1439
+S'55434558'
+p1440
+aS'Unicode extensions'
+p1441
+aa(lp1442
+S'554641c6d2c1'
+p1443
+aS'UFA compressed archive'
+p1444
+aa(lp1445
+S'4d5a'
+p1446
+aS'VisualBASIC application'
+p1447
+aa(lp1448
+S'454e545259564344'
+p1449
+aS'VideoVCD|VCDImager file'
+p1450
+aa(lp1451
+S'424547494e3a5643'
+p1452
+aS'vCard'
+p1453
+aa(lp1454
+S'5b4d535643'
+p1455
+aS'Visual C++ Workbench Info File'
+p1456
+aa(lp1457
+S'636f6e6563746978'
+p1458
+aS'Virtual PC HD image'
+p1459
+aa(lp1460
+S'434f5744'
+p1461
+aS'VMware 3 Virtual Disk'
+p1462
+aa(lp1463
+S'23204469736b2044'
+p1464
+aS'VMware 4 Virtual Disk description'
+p1465
+aa(lp1466
+S'4b444d'
+p1467
+aS'VMware 4 Virtual Disk'
+p1468
+aa(lp1469
+S'000001ba'
+p1470
+aS'DVD video file'
+p1471
+aa(lp1472
+S'd0cf11e0a1b11ae1'
+p1473
+aS'Visio file'
+p1474
+aa(lp1475
+S'4d5a'
+p1476
+aS'Windows virtual device drivers'
+p1477
+aa(lp1478
+S'9ccbcb8d1375d211'
+p1479
+aS'Outlook address file'
+p1480
+aa(lp1481
+S'813284c18505d011'
+p1482
+aS'Outlook Express address book (Win95)'
+p1483
+aa(lp1484
+S'52494646'
+p1485
+aS'Resource Interchange File Format'
+p1486
+aa(lp1487
+S'00000200'
+p1488
+aS'QuattroPro spreadsheet'
+p1489
+aa(lp1490
+S'3e000300feff090006'
+p1491
+aS'Quatro Pro for Windows 7.0'
+p1492
+aa(lp1493
+S'd0cf11e0a1b11ae1'
+p1494
+aS'Microsoft Office document'
+p1495
+aa(lp1496
+S'0000020006040600'
+p1497
+aS'Lotus 1-2-3 (v1)'
+p1498
+aa(lp1499
+S'00001a0000100400'
+p1500
+aS'Lotus 1-2-3 (v3)'
+p1501
+aa(lp1502
+S'00001a0002100400'
+p1503
+aS'Lotus 1-2-3 (v4|v5)'
+p1504
+aa(lp1505
+S'00001a0002100400'
+p1506
+aS'Lotus 1-2-3 (v4|v5)'
+p1507
+aa(lp1508
+S'0e574b53'
+p1509
+aS'DeskMate Worksheet'
+p1510
+aa(lp1511
+S'ff00020004040554'
+p1512
+aS'Works for Windows spreadsheet'
+p1513
+aa(lp1514
+S'3026b2758e66cf11'
+p1515
+aS'Windows Media Audio|Video File'
+p1516
+aa(lp1517
+S'd7cdc69a'
+p1518
+aS'Windows graphics metafile'
+p1519
+aa(lp1520
+S'3026b2758e66cf11'
+p1521
+aS'Windows Media Audio|Video File'
+p1522
+aa(lp1523
+S'504b0304'
+p1524
+aS'Windows Media compressed skin file'
+p1525
+aa(lp1526
+S'ff575043'
+p1527
+aS'WordPerfect text and graphics'
+p1528
+aa(lp1529
+S'ff575043'
+p1530
+aS'WordPerfect text and graphics'
+p1531
+aa(lp1532
+S'ff575043'
+p1533
+aS'WordPerfect text and graphics'
+p1534
+aa(lp1535
+S'ff575043'
+p1536
+aS'WordPerfect text and graphics'
+p1537
+aa(lp1538
+S'81cdab'
+p1539
+aS'WordPerfect text'
+p1540
+aa(lp1541
+S'ff575043'
+p1542
+aS'WordPerfect text and graphics'
+p1543
+aa(lp1544
+S'4d6963726f736f66742057696e646f7773204d6564696120506c61796572202d2d20'
+p1545
+aS'Windows Media Player playlist'
+p1546
+aa(lp1547
+S'ff575043'
+p1548
+aS'WordPerfect text and graphics'
+p1549
+aa(lp1550
+S'd0cf11e0a1b11ae1'
+p1551
+aS'MSWorks text document'
+p1552
+aa(lp1553
+S'31be'
+p1554
+aS'MS Write file_1'
+p1555
+aa(lp1556
+S'32be'
+p1557
+aS'MS Write file_2'
+p1558
+aa(lp1559
+S'be000000ab'
+p1560
+aS'MS Write file_3'
+p1561
+aa(lp1562
+S'1d7d'
+p1563
+aS'WordStar Version 5.0|6.0 document'
+p1564
+aa(lp1565
+S'575332303030'
+p1566
+aS'WordStar for Windows file'
+p1567
+aa(lp1568
+S'3c'
+p1569
+aS'BizTalk XML-Data Reduced Schema'
+p1570
+aa(lp1571
+S'd0cf11e0a1b11ae1'
+p1572
+aS'Microsoft Office document'
+p1573
+aa(lp1574
+S'd0cf11e0a1b11ae1'
+p1575
+aS'Microsoft Office document'
+p1576
+aa(lp1577
+S'0908100000060500'
+p1578
+aS'Excel spreadsheet subheader_1'
+p1579
+aa(lp1580
+S'fdffffff10'
+p1581
+aS'Excel spreadsheet subheader_2'
+p1582
+aa(lp1583
+S'fdffffff1f'
+p1584
+aS'Excel spreadsheet subheader_3'
+p1585
+aa(lp1586
+S'fdffffff22'
+p1587
+aS'Excel spreadsheet subheader_4'
+p1588
+aa(lp1589
+S'fdffffff23'
+p1590
+aS'Excel spreadsheet subheader_5'
+p1591
+aa(lp1592
+S'fdffffff28'
+p1593
+aS'Excel spreadsheet subheader_6'
+p1594
+aa(lp1595
+S'fdffffff29'
+p1596
+aS'Excel spreadsheet subheader_7'
+p1597
+aa(lp1598
+S'504b0304'
+p1599
+aS'MS Office Open XML Format Document'
+p1600
+aa(lp1601
+S'504b030414000600'
+p1602
+aS'MS Office 2007 documents'
+p1603
+aa(lp1604
+S'3c3f786d6c2076657273696f6e3d22312e30223f3e'
+p1605
+aS'User Interface Language'
+p1606
+aa(lp1607
+S'504b0304'
+p1608
+aS'Mozilla Browser Archive'
+p1609
+aa(lp1610
+S'504b0304'
+p1611
+aS'XML paper specification file'
+p1612
+aa(lp1613
+S'504b0304'
+p1614
+aS'eXact Packager Models'
+p1615
+aa(lp1616
+S'5850434f4d0a5479'
+p1617
+aS'XPCOM libraries'
+p1618
+aa(lp1619
+S'4d5a90000300000004000000ffff'
+p1620
+aS'ZoneAlam data file'
+p1621
+aa(lp1622
+S'504b0304'
+p1623
+aS'PKZIP archive_1'
+p1624
+aa(lp1625
+S'504b4c495445'
+p1626
+aS'PKLITE archive'
+p1627
+aa(lp1628
+S'504b537058'
+p1629
+aS'PKSFX self-extracting archive'
+p1630
+aa(lp1631
+S'504b0506'
+p1632
+aS'PKZIP archive_2'
+p1633
+aa(lp1634
+S'504b0708'
+p1635
+aS'PKZIP archive_3'
+p1636
+aa(lp1637
+S'57696e5a6970'
+p1638
+aS'WinZip compressed archive'
+p1639
+aa(lp1640
+S'504b030414000100'
+p1641
+aS'ZLock Pro encrypted ZIP'
+p1642
+aa(lp1643
+S'5a4f4f20'
+p1644
+aS'ZOO compressed archive'
+p1645
+aa.
