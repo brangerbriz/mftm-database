@@ -24,7 +24,7 @@ CREATE TABLE `transaction_outputs` (
   `index` int NOT NULL,
   `address` varchar(36) NOT NULL,
   `value` bigint NOT NULL,
-  PRIMARY KEY (`transaction_hash`),
+  PRIMARY KEY (`transaction_hash`, `index`),
   FOREIGN KEY (`transaction_hash`) REFERENCES `transactions` (`transaction_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -34,7 +34,7 @@ CREATE TABLE `transaction_inputs` (
   `index` int NOT NULL,
   `prev_output_transaction_hash` char(64) NOT NULL,
   `prev_output_index` int NOT NULL,
-  PRIMARY KEY (`transaction_hash`),
+  PRIMARY KEY (`transaction_hash`, `index`),
   FOREIGN KEY (`transaction_hash`) REFERENCES `transactions` (`transaction_hash`),
   FOREIGN KEY (`prev_output_transaction_hash`) REFERENCES `transactions` (`transaction_hash`),
   FOREIGN KEY (`prev_output_transaction_hash`) REFERENCES `transaction_outputs` (`transaction_hash`)
@@ -43,13 +43,14 @@ CREATE TABLE `transaction_inputs` (
 DROP TABLE IF EXISTS `ascii_coinbase_messages`;
 CREATE TABLE `ascii_coinbase_messages` (
   `transaction_hash` char(64) NOT NULL,
+  `script_op_index` int NOT NULL,
   `data` varchar(255) NOT NULL,
   `valid` tinyint(4) DEFAULT NULL,
   `tags` text DEFAULT NULL,
   `bookmarked` tinyint(4) DEFAULT NULL,
   `reviewed` tinyint(4) DEFAULT NULL,
   `annotation` mediumtext DEFAULT NULL,
-  PRIMARY KEY (`transaction_hash`),
+  PRIMARY KEY (`transaction_hash`, `script_op_index`),
   FOREIGN KEY (`transaction_hash`) REFERENCES `transactions` (`transaction_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -83,14 +84,20 @@ CREATE TABLE `file_address_messages` (
 
 -- indexes
 
-CREATE INDEX `ascii_coinbase_messages_data_index`
-ON `ascii_coinbase_messages` (`data`(50));
+-- CREATE INDEX `ascii_coinbase_messages_data_index`
+-- ON `ascii_coinbase_messages` (`data`(50));
+--
+-- CREATE INDEX `utf8_address_messages_data_index`
+-- ON `utf8_address_messages` (`data`(50));
+--
+-- CREATE INDEX `file_address_messages_data_index`
+-- ON `file_address_messages` (`data`(50));
 
-CREATE INDEX `utf8_address_messages_data_index`
-ON `utf8_address_messages` (`data`(50));
-
-CREATE INDEX `file_address_messages_data_index`
-ON `file_address_messages` (`data`(50));
+-- NEED TO FIGURE OUT HOW TO HANDLE FOREIGN KEY ERROR
+-- FOR BITCOIN TRANSACTION OUTPUTS THAT REFERENCE GENESIS BLOCK AS INPUT
+-- e.g.
+-- transaction_hash,index,prev_output_transaction_hash,prev_output_index
+-- 4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b,0,0000000000000000000000000000000000000000000000000000000000000000,4294967295
 
 -- csvs import warnings can be shown in mysql shell with:
 -- LOAD DATA LOCAL INFILE '/media/bbpwn2/eMerge\ Drive/messages-from-the-mines/ascii_coinbase_messages.csv'  INTO TABLE `ascii_coinbase_messages` FIELDS TERMINATED BY ','  OPTIONALLY ENCLOSED BY '\"'  IGNORE 1 LINES; SHOW WARNINGS;

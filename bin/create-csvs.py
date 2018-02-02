@@ -4,6 +4,8 @@ sys.path.append('../lib/python-bitcoin-blockchain-parser')
 import os
 import csv
 import binascii
+import pickle
+from collections import OrderedDict
 from base58 import b58decode
 from blockchain_parser.blockchain import Blockchain
 from blockchain_parser.script import CScriptInvalidError, CScriptInvalidError, CScriptTruncatedPushDataError
@@ -55,7 +57,7 @@ def open_csv_writers(folder):
     tx_out_writer = csv.DictWriter(tx_out_file, fieldnames=fieldnames, **kwargs)
     tx_out_writer.writeheader()
 
-    fieldnames = ['transaction_hash', 'data', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
+    fieldnames = ['transaction_hash', 'script_op_index', 'data', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
     ascii_coinbase_messages_writer = csv.DictWriter(ascii_coinbase_messages_file, fieldnames=fieldnames, **kwargs)
     ascii_coinbase_messages_writer.writeheader()
 
@@ -106,7 +108,41 @@ def decode_address_uft8(base58address):
     except UnicodeDecodeError as err:
         return None
 
-data = open_csv_writers('/media/bbpwn2/eMerge Drive/messages-from-the-mines')
+def load_magic_sigs(min_sig_length=4):
+
+    with open('../data/file_sigs.pickle', 'rb') as f:
+        data = pickle.load(f)
+    # create a dict where keys are file signatures and values are empty arrays
+    magic_sigs = { x[0]: [] for x in data if len(x[0]) >= min_sig_length}
+    # populate arrays with names of filetypes that have that signature
+    for x in data:
+        if len(x[0]) >= min_sig_length:
+            magic_sigs[x[0]].append(x[1])
+
+    # oops, order the keys by longest magic sig first. didn't realize I needed
+    # this till later. This function could probably be written better now but
+    # who cares, it only runs once.
+    ms = OrderedDict()
+
+    longest_sigs = sorted([k for k in magic_sigs], key=lambda x: -len(x))
+    for sig in longest_sigs:
+        ms[sig] = magic_sigs[sig]
+    return ms
+
+# givin a hex string (data payload), determin the longest magic signature its
+# first characters match
+def get_filetype(magic_sigs, hex_string):
+    for sig, filetypes in magic_sigs.items():
+        if hex_string.startswith(sig):
+            return ', '.join(filetypes)
+    return None
+
+magic_sigs = load_magic_sigs(1)
+for sig, files in magic_sigs.items():
+    print('{}: {}'.format(sig, ', '.join(files)))
+exit(0)
+
+data = open_csv_writers('/media/bbpwn2/eMerge Drive/mftm-database/data/csv')
 
 blockchain = Blockchain(sys.argv[1])
 block_index = 0
@@ -139,7 +175,7 @@ for block in blockchain.get_unordered_blocks():
                     script_operations = coinbase.script.operations
 
                     # An operation is a CScriptOP or pushed bytes
-                    for operation in script_operations:
+                    for op_index, operation in enumerate(script_operations):
                         if type(operation) == bytes and len(operation) > 3 \
                                 and is_ascii_text(operation):
                             try:
@@ -149,6 +185,7 @@ for block in blockchain.get_unordered_blocks():
                                 # write the coinbase message info to ascii_coinbase_messages.csv
                                 data['writers']['ascii_coinbase_messages'].writerow({
                                     'transaction_hash': transaction.hash,
+                                    'script_op_index': op_index,
                                     'data': coinbase_message,
                                     'valid': 0,
                                     'tags': '',
@@ -156,6 +193,10 @@ for block in blockchain.get_unordered_blocks():
                                     'reviewed': 0,
                                     'annotation': ''
                                 })
+
+                                print('[+] coinbase found in tx {} script index {}:'.format(transaction.hash, op_index))
+                                print(coinbase_message)
+
                             except UnicodeDecodeError as err:
                                 pass
                 except CScriptInvalidError:
@@ -171,6 +212,7 @@ for block in blockchain.get_unordered_blocks():
                 })
 
             text_buff = ''
+            bytes_buff = bytearray()
             try:
                 for output_index, output in enumerate(transaction.outputs):
                     for address_index, address in enumerate(output.addresses):
@@ -191,6 +233,7 @@ for block in blockchain.get_unordered_blocks():
                         # and are left with 160 bits of binary data
                         decodedBin = b58decode(address.address)
                         decodedBin = decodedBin[1:-4]
+                        bytes_buff += decodedBin
 
                         try:
                             # try and decode the data as text
@@ -199,38 +242,69 @@ for block in blockchain.get_unordered_blocks():
                         except UnicodeDecodeError as err:
                             pass
 
-                        if text_buff != '' and \
-                           output_index == len(transaction.outputs) - 1 and \
-                           address_index == len(output.addresses) - 1:
-                            # transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation
-                            # write the coinbase message info to ascii_coinbase_messages.csv
-                            data['writers']['utf8_address_messages'].writerow({
-                                'transaction_hash': transaction.hash,
-                                # save utf8 data as a hex string
-                                'data': binascii.hexlify(bytes(text_buff, encoding='utf8')).decode(),
-                                'filetype': '',
-                                'valid': 0,
-                                'tags': '',
-                                'bookmarked': 0,
-                                'reviewed': 0,
-                                'annotation': ''
-                            })
+                        # if this is the last address in the last output
+                        if output_index == len(transaction.outputs) - 1 and \
+                        address_index == len(output.addresses) - 1:
 
-                            print('---------------------------------------------')
-                            # print('length: {}'.format(len(text_buff)))
-                            # print('bytes: {}'.format("".join("{:02x}".format(ord(c)) for c in text_buff)))
-                            print(text_buff)
-                            text_buff = ''
+                            filetype = get_filetype(magic_sigs, bytes_buff.hex())
+                            if filetype:
+                                # transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation
+                                # write the coinbase message info to ascii_coinbase_messages.csv
+                                data['writers']['file_address_messages'].writerow({
+                                    'transaction_hash': transaction.hash,
+                                    # save binary data as a hex string
+                                    'data': bytes_buff.hex(),
+                                    'filetype': filetype,
+                                    'valid': 0,
+                                    'tags': '',
+                                    'bookmarked': 0,
+                                    'reviewed': 0,
+                                    'annotation': ''
+                                })
+                                # print('---------------------------------------------')
+                                print('[+] possible "{}" file found in tx {}'.format(filetype, transaction.hash))
+
+                            # if text was found in any of the output address blocks
+                            if text_buff != '':
+                                # transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation
+                                # write the coinbase message info to ascii_coinbase_messages.csv
+                                data['writers']['utf8_address_messages'].writerow({
+                                    'transaction_hash': transaction.hash,
+                                    # save utf8 data as a hex string
+                                    'data': binascii.hexlify(bytes(text_buff, encoding='utf8')).decode(),
+                                    'filetype': '',
+                                    'valid': 0,
+                                    'tags': '',
+                                    'bookmarked': 0,
+                                    'reviewed': 0,
+                                    'annotation': ''
+                                })
+
+                                # print('---------------------------------------------')
+                                # print('length: {}'.format(len(text_buff)))
+                                # print('bytes: {}'.format("".join("{:02x}".format(ord(c)) for c in text_buff)))
+                                print('[+] utf8 data found in tx {}:'.format(transaction.hash))
+                                print('{}'.format(text_buff))
+                                text_buff = ''
 
             except CScriptTruncatedPushDataError as err:
-                print('[!] CAUGHT: {}'.format(err), file=sys.stderr)
+                print('[!] caught: {}'.format(err), file=sys.stderr)
     except AssertionError as err:
-        print('[!] CAUGHT: {}'.format(err), file=sys.stderr)
+        print('[!] caught: {}'.format(err), file=sys.stderr)
 
-    # tmp
-    data['files']['utf8_address_messages'].flush()
     if block_index % 1000 == 0:
-        print('block #{}'.format(block_index))
+
+        # flush files after each 1000 blocks, because fuuuuuuuuuu for not
+        data['files']['blocks'].flush()
+        data['files']['transactions'].flush()
+        data['files']['transaction_inputs'].flush()
+        data['files']['transaction_outputs'].flush()
+        data['files']['ascii_coinbase_messages'].flush()
+        data['files']['utf8_address_messages'].flush()
+        data['files']['file_address_messages'].flush()
+
+        print('[+] block #{}'.format(block_index))
+
     block_index += 1
 
 # close the csv file descriptors
