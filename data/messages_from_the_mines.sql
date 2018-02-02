@@ -4,8 +4,8 @@ USE `messages_from_the_mines`;
 
 DROP TABLE IF EXISTS `blocks`;
 CREATE TABLE `blocks` (
+  `block_height` int NOT NULL,
   `block_hash` char(64) NOT NULL,
-  `prev_hash` char(64) NOT NULL,
   `timestamp_mined` datetime NOT NULL,
   PRIMARY KEY (`block_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE `transactions` (
   `transaction_hash` char(64) NOT NULL,
   `block_hash` char(64) NOT NULL,
+  `index` int NOT NULL,
   PRIMARY KEY (`transaction_hash`),
   FOREIGN KEY (`block_hash`) REFERENCES `blocks` (`block_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

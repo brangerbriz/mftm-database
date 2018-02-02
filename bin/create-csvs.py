@@ -11,9 +11,9 @@ from blockchain_parser.blockchain import Blockchain
 from blockchain_parser.script import CScriptInvalidError, CScriptInvalidError, CScriptTruncatedPushDataError
 
 # Blocks
-#	 block_hash ; prev_hash ; timestamp_mined
+#	 block_height ; block_hash ; timestamp_mined
 # Transactions
-# 	transaction_hash ; block_hash
+# 	transaction_hash ; block_hash ; index
 # Transaction Inputs
 #	transaction_hash ; index ; prev_output_transaction_hash ; prev_output_index
 # Transaction outputs
@@ -41,11 +41,11 @@ def open_csv_writers(folder):
         'doublequote': False
     }
 
-    fieldnames = ['block_hash', 'prev_hash', 'timestamp_mined']
+    fieldnames = ['block_height', 'block_hash', 'timestamp_mined']
     blocks_writer = csv.DictWriter(blocks_file, fieldnames=fieldnames, **kwargs)
     blocks_writer.writeheader()
 
-    fieldnames = ['transaction_hash', 'block_hash']
+    fieldnames = ['transaction_hash', 'block_hash', 'index']
     tx_writer = csv.DictWriter(tx_file, fieldnames=fieldnames, **kwargs)
     tx_writer.writeheader()
 
@@ -137,22 +137,23 @@ def get_filetype(magic_sigs, hex_string):
             return ', '.join(filetypes)
     return None
 
-magic_sigs = load_magic_sigs(1)
-for sig, files in magic_sigs.items():
-    print('{}: {}'.format(sig, ', '.join(files)))
-exit(0)
+magic_sigs = load_magic_sigs()
 
 data = open_csv_writers('/media/bbpwn2/eMerge Drive/mftm-database/data/csv')
 
 blockchain = Blockchain(sys.argv[1])
-block_index = 0
-for block in blockchain.get_unordered_blocks():
+last_block_height = -1
+for block in blockchain.get_ordered_blocks(os.path.join(sys.argv[1], 'index')):
+
+    # double check that ordered blocks are working
+    assert(block.height == last_block_height + 1)
+    last_block_height = block.height
 
     # write the block info to blocks.csv
     block_header = block.header # cache the header getter
     data['writers']['blocks'].writerow({
+        'block_height': block.height,
         'block_hash': block.hash,
-        'prev_hash': block_header.previous_block_hash,
         'timestamp_mined': block_header.timestamp
     })
 
@@ -162,7 +163,8 @@ for block in blockchain.get_unordered_blocks():
             # write the transaction info to transaction.csv
             data['writers']['transactions'].writerow({
                 'transaction_hash': transaction.hash,
-                'block_hash': block.hash
+                'block_hash': block.hash,
+                'index': tx_index
             })
 
             # if this is the first transaction in the block save its
@@ -292,7 +294,7 @@ for block in blockchain.get_unordered_blocks():
     except AssertionError as err:
         print('[!] caught: {}'.format(err), file=sys.stderr)
 
-    if block_index % 1000 == 0:
+    if block.height % 1000 == 0:
 
         # flush files after each 1000 blocks, because fuuuuuuuuuu for not
         data['files']['blocks'].flush()
@@ -303,9 +305,7 @@ for block in blockchain.get_unordered_blocks():
         data['files']['utf8_address_messages'].flush()
         data['files']['file_address_messages'].flush()
 
-        print('[+] block #{}'.format(block_index))
-
-    block_index += 1
+        print('[+] block #{}'.format(block.height))
 
 # close the csv file descriptors
 close_csv_files(data['files'])
