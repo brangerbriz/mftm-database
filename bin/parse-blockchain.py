@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys
 sys.path.append('../lib/python-bitcoin-blockchain-parser')
 
@@ -6,6 +8,7 @@ import csv
 import binascii
 import pickle
 import argparse
+import signal
 from collections import OrderedDict
 from base58 import b58decode
 from blockchain_parser.blockchain import Blockchain
@@ -21,6 +24,12 @@ def parse_args():
                         help='directory to save output csv files to (default: ../data/csv).')
     parser.add_argument('--resume', default=False, action='store_true',
                         help='resume parsing from files in --output-dir')
+    parser.add_argument('--blockfile-lookback', default=1, type=int, dest='blockfile_lookback',
+                        help='The number of .dat blockfiles to look back when looking for '
+                             'the block hash checkpoint when using --resume. A larger '
+                             'value may result in higher ram consumption with the trade off '
+                             'that there is a higher chance that it will be able to recover '
+                             'from the checkpoint.')
     return parser.parse_args()
 
 # Blocks
@@ -175,11 +184,33 @@ def main():
     magic_sigs = load_magic_sigs()
     data = open_csv_writers(args.output_dir, args.resume)
 
+    needs_exit = False
+
+    def signal_handler(signal, frame):
+        nonlocal needs_exit
+        print('[!] ctrl-c caught, exit is queued, waiting for cleanup...')
+        needs_exit = True
+        
+    signal.signal(signal.SIGINT, signal_handler)
+
     kwargs = {}
     if args.resume:
         resume_block = get_last_block(os.path.join(args.output_dir, 'blocks.csv'))
         print('[*] resuming with block #{}: {}'.format(resume_block['block_height'], resume_block['block_hash']))
-        kwargs['start_blockfile_basename'] = resume_block['blockfile']
+
+        blockfile = resume_block['blockfile']
+        blockfile_num = int(resume_block['blockfile'][3:-4])
+        print('TRANSACTION FOUND IN {}'.format(resume_block['blockfile']))
+        # if this transaction didn't occur in the first .dat file
+        if blockfile_num != 0:
+            if blockfile_num - args.blockfile_lookback >= 0:
+                blockfile_num -= args.blockfile_lookback
+            else:
+                blockfile_num = 0
+            # use --blockfile_lookback to load an earlier .dat file
+            blockfile = 'blk{}.dat'.format(str(blockfile_num).zfill(5))
+        print('LOADING AS FAR BACK AS {}'.format(blockfile))
+        kwargs['start_blockfile_basename'] = blockfile
         kwargs['resume_block_hash'] = resume_block['block_hash']
         kwargs['resume_block_height'] = resume_block['block_height']
 
@@ -340,7 +371,7 @@ def main():
             except CScriptTruncatedPushDataError as err:
                 print('[!] caught 1: {}'.format(err), file=sys.stderr)
 
-        if block.height and block.height % 1000 == 0:
+        if block.height % 1000 == 0 or needs_exit:
 
             # flush files after each 1000 blocks, because fuuuuuuuuuu for not
             data['files']['blocks'].flush()
@@ -352,6 +383,10 @@ def main():
             data['files']['file_address_messages'].flush()
 
             print('[+] block #{}'.format(block.height))
+
+            if needs_exit:
+                print('[!] exiting.'.format(block.height))
+                sys.exit(0)
 
     # close the csv file descriptors
     close_csv_files(data['files'])
