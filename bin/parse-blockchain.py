@@ -19,10 +19,12 @@ def parse_args():
     parser.add_argument('--output-dir', type=str, dest='output_dir',
                         default='../data/csv',
                         help='directory to save output csv files to (default: ../data/csv).')
+    parser.add_argument('--resume', default=False, action='store_true',
+                        help='resume parsing from files in --output-dir')
     return parser.parse_args()
 
 # Blocks
-#	 block_height ; block_hash ; timestamp_mined
+#	 block_height ; block_hash ; timestamp_mined ; blockfile
 # Transactions
 # 	transaction_hash ; block_hash ; index
 # Transaction Inputs
@@ -36,15 +38,17 @@ def parse_args():
 # File Address Messages
 # 	transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation
 
-def open_csv_writers(folder):
+def open_csv_writers(folder, append):
 
-    blocks_file = open(os.path.join(folder, 'blocks.csv'), 'w', encoding='utf-8')
-    tx_file = open(os.path.join(folder, 'transactions.csv'), 'w', encoding='utf-8')
-    tx_in_file = open(os.path.join(folder, 'transaction_inputs.csv'), 'w', encoding='utf-8')
-    tx_out_file = open(os.path.join(folder, 'transaction_outputs.csv'), 'w', encoding='utf-8')
-    ascii_coinbase_messages_file = open(os.path.join(folder, 'ascii_coinbase_messages.csv'), 'w', encoding='utf-8')
-    utf8_address_messages_file = open(os.path.join(folder, 'utf8_address_messages.csv'), 'w', encoding='utf-8')
-    file_address_messages_file = open(os.path.join(folder, 'file_address_messages.csv'), 'w', encoding='utf-8')
+    open_as = 'a' if append else 'w'
+
+    blocks_file = open(os.path.join(folder, 'blocks.csv'), open_as, encoding='utf-8')
+    tx_file = open(os.path.join(folder, 'transactions.csv'), open_as, encoding='utf-8')
+    tx_in_file = open(os.path.join(folder, 'transaction_inputs.csv'), open_as, encoding='utf-8')
+    tx_out_file = open(os.path.join(folder, 'transaction_outputs.csv'), open_as, encoding='utf-8')
+    ascii_coinbase_messages_file = open(os.path.join(folder, 'ascii_coinbase_messages.csv'), open_as, encoding='utf-8')
+    utf8_address_messages_file = open(os.path.join(folder, 'utf8_address_messages.csv'), open_as, encoding='utf-8')
+    file_address_messages_file = open(os.path.join(folder, 'file_address_messages.csv'), open_as, encoding='utf-8')
 
     kwargs = {
         'dialect': csv.excel,
@@ -52,33 +56,35 @@ def open_csv_writers(folder):
         'doublequote': False
     }
 
-    fieldnames = ['block_height', 'block_hash', 'timestamp_mined']
+    fieldnames = ['block_height', 'block_hash', 'timestamp_mined', 'blockfile']
     blocks_writer = csv.DictWriter(blocks_file, fieldnames=fieldnames, **kwargs)
-    blocks_writer.writeheader()
 
     fieldnames = ['transaction_hash', 'block_hash', 'index']
     tx_writer = csv.DictWriter(tx_file, fieldnames=fieldnames, **kwargs)
-    tx_writer.writeheader()
 
     fieldnames = ['transaction_hash', 'index', 'prev_output_transaction_hash', 'prev_output_index']
     tx_in_writer = csv.DictWriter(tx_in_file, fieldnames=fieldnames, **kwargs)
-    tx_in_writer.writeheader()
 
     fieldnames = ['transaction_hash', 'index', 'address', 'value']
     tx_out_writer = csv.DictWriter(tx_out_file, fieldnames=fieldnames, **kwargs)
-    tx_out_writer.writeheader()
 
     fieldnames = ['transaction_hash', 'script_op_index', 'data', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
     ascii_coinbase_messages_writer = csv.DictWriter(ascii_coinbase_messages_file, fieldnames=fieldnames, **kwargs)
-    ascii_coinbase_messages_writer.writeheader()
 
     fieldnames = ['transaction_hash', 'data', 'filetype', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
     utf8_address_messages_writer = csv.DictWriter(utf8_address_messages_file, fieldnames=fieldnames, **kwargs)
-    utf8_address_messages_writer.writeheader()
 
     fieldnames = ['transaction_hash', 'data', 'filetype', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
     file_address_messages_writer = csv.DictWriter(file_address_messages_file, fieldnames=fieldnames, **kwargs)
-    file_address_messages_writer.writeheader()
+
+    if not append:
+        blocks_writer.writeheader()
+        tx_writer.writeheader()
+        tx_in_writer.writeheader()
+        tx_out_writer.writeheader()
+        ascii_coinbase_messages_writer.writeheader()
+        utf8_address_messages_writer.writeheader()
+        file_address_messages_writer.writeheader()
 
     data = dict()
     data['files'] = dict()
@@ -148,15 +154,40 @@ def get_filetype(magic_sigs, hex_string):
             return ', '.join(filetypes)
     return None
 
+# read the last row of blocks.csv and return an oject with:
+# { block_height, block_hash, blockfile }
+def get_last_block(blocks_csv_path):
+
+    with open(blocks_csv_path, 'r') as f:
+        reader = csv.reader(f)
+        # skip the header
+        next(reader)
+        last_row = list(reversed(list(reader)))[0]
+        return {
+            'block_height': int(last_row[0]), 
+            'block_hash': last_row[1], 
+            'blockfile': last_row[3]
+        }
+
 def main():
 
     args = parse_args()
     magic_sigs = load_magic_sigs()
-    data = open_csv_writers(args.output_dir)
+    data = open_csv_writers(args.output_dir, args.resume)
+
+    kwargs = {}
+    if args.resume:
+        resume_block = get_last_block(os.path.join(args.output_dir, 'blocks.csv'))
+        print('[*] resuming with block #{}: {}'.format(resume_block['block_height'], resume_block['block_hash']))
+        kwargs['start_blockfile_basename'] = resume_block['blockfile']
+        kwargs['resume_block_hash'] = resume_block['block_hash']
+        kwargs['resume_block_height'] = resume_block['block_height']
+
 
     blockchain = Blockchain(args.block_dir)
     last_block_height = -1
-    for block, blk_file in blockchain.get_unordered_blocks(start_blockfile_basename='blk00977.dat'):
+    for block, blk_file in blockchain.get_ordered_blocks(**kwargs):
+
         # double check that ordered blocks are working
         # assert(block.height == last_block_height + 1)
         last_block_height = block.height
@@ -166,7 +197,8 @@ def main():
         data['writers']['blocks'].writerow({
             'block_height': block.height,
             'block_hash': block.hash,
-            'timestamp_mined': block_header.timestamp
+            'timestamp_mined': block_header.timestamp,
+            'blockfile': os.path.basename(blk_file)
         })
 
         for tx_index, transaction in enumerate(block.transactions):
