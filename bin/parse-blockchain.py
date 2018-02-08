@@ -2,13 +2,14 @@
 
 import sys
 sys.path.append('../lib/python-bitcoin-blockchain-parser')
+sys.path.append('../src')
 
 import os
 import csv
 import binascii
-import pickle
 import argparse
 import signal
+import signatures
 from collections import OrderedDict
 from base58 import b58decode
 from blockchain_parser.blockchain import Blockchain
@@ -101,7 +102,7 @@ def open_csv_writers(folder, append):
 
     data['files']['blocks'] = blocks_file
     data['files']['transactions'] = tx_file
-    data['files']['transaction_inputs'] = tx_in_file
+    data['files']['transaction_inputs'] = tx_in_filetimestamp
     data['files']['transaction_outputs'] = tx_out_file
     data['files']['ascii_coinbase_messages'] = ascii_coinbase_messages_file
     data['files']['utf8_address_messages'] = utf8_address_messages_file
@@ -134,27 +135,6 @@ def decode_address_uft8(base58address):
     except UnicodeDecodeError as err:
         return None
 
-def load_magic_sigs(min_sig_length=4):
-
-    with open('../data/file_sigs.pickle', 'rb') as f:
-        data = pickle.load(f)
-    # create a dict where keys are file signatures and values are empty arrays
-    magic_sigs = { x[0]: [] for x in data if len(x[0]) >= min_sig_length}
-    # populate arrays with names of filetypes that have that signature
-    for x in data:
-        if len(x[0]) >= min_sig_length:
-            magic_sigs[x[0]].append(x[1])
-
-    # oops, order the keys by longest magic sig first. didn't realize I needed
-    # this till later. This function could probably be written better now but
-    # who cares, it only runs once.
-    ms = OrderedDict()
-
-    longest_sigs = sorted([k for k in magic_sigs], key=lambda x: -len(x))
-    for sig in longest_sigs:
-        ms[sig] = magic_sigs[sig]
-    return ms
-
 # givin a hex string (data payload), determin the longest magic signature its
 # first characters match
 def get_filetype(magic_sigs, hex_string):
@@ -173,15 +153,14 @@ def get_last_block(blocks_csv_path):
         next(reader)
         last_row = list(reversed(list(reader)))[0]
         return {
-            'block_height': int(last_row[0]), 
-            'block_hash': last_row[1], 
+            'block_height': int(last_row[0]),
+            'block_hash': last_row[1],
             'blockfile': last_row[3]
         }
 
 def main():
 
     args = parse_args()
-    magic_sigs = load_magic_sigs()
     data = open_csv_writers(args.output_dir, args.resume)
 
     needs_exit = False
@@ -190,7 +169,7 @@ def main():
         nonlocal needs_exit
         print('[!] ctrl-c caught, exit is queued, waiting for cleanup...')
         needs_exit = True
-        
+
     signal.signal(signal.SIGINT, signal_handler)
 
     kwargs = {}
@@ -327,7 +306,7 @@ def main():
                         if output_index == len(transaction.outputs) - 1 and \
                         address_index == len(output.addresses) - 1:
 
-                            filetype = get_filetype(magic_sigs, bytes_buff.hex())
+                            filetype = signatures.get_filetype(bytes_buff.hex())
                             if filetype:
                                 # transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation
                                 # write the coinbase message info to ascii_coinbase_messages.csv
@@ -343,7 +322,7 @@ def main():
                                     'annotation': ''
                                 })
                                 # print('---------------------------------------------')
-                                print('[+] possible "{}" file found in tx {}'.format(filetype, transaction.hash))
+                                print('[+] possible {} file found in tx {}'.format(filetype, transaction.hash))
 
                             # if text was found in any of the output address blocks
                             if text_buff != '':
