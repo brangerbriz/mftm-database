@@ -33,13 +33,13 @@ def main():
 			folder = os.path.join(args.output_dir, folder)
 
 			ext = 'txt' if 'utf8_address_messages.csv' in args.input else row['filetype']
-			filename = os.path.join(folder, '{}_{}.{}'.format(str(index).zfill(5), row['transaction_hash'], ext))
+			filename = os.path.join(folder, '{}_{}.{}'.format(str(num_saved).zfill(5), row['transaction_hash'], ext))
 			
 			if not os.path.isdir(folder):
 				os.makedirs(folder)
 			
 			byts = bytes.fromhex(row['data'])
-			if args.min_bytes > 0 and len(byts) >= args.min_bytes:
+			if len(byts) >= args.min_bytes:
 				with open(filename, 'wb') as f:
 					out = f.write(byts)
 					print('[+] wrote {} bytes to {}'.format(out, filename))
