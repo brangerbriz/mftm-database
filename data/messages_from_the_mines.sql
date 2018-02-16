@@ -7,6 +7,7 @@ CREATE TABLE `blocks` (
   `block_height` int NOT NULL,
   `block_hash` char(64) NOT NULL,
   `timestamp_mined` datetime NOT NULL,
+  `blockfile` char(12) NOT NULL,
   PRIMARY KEY (`block_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

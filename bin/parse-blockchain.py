@@ -81,7 +81,7 @@ def open_csv_writers(folder, append):
     fieldnames = ['transaction_hash', 'script_op_index', 'data', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
     ascii_coinbase_messages_writer = csv.DictWriter(ascii_coinbase_messages_file, fieldnames=fieldnames, **kwargs)
 
-    fieldnames = ['transaction_hash', 'data', 'filetype', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
+    fieldnames = ['transaction_hash', 'data', 'filetype', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation', 'format']
     utf8_address_messages_writer = csv.DictWriter(utf8_address_messages_file, fieldnames=fieldnames, **kwargs)
 
     fieldnames = ['transaction_hash', 'data', 'filetype', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
@@ -102,7 +102,7 @@ def open_csv_writers(folder, append):
 
     data['files']['blocks'] = blocks_file
     data['files']['transactions'] = tx_file
-    data['files']['transaction_inputs'] = tx_in_filetimestamp
+    data['files']['transaction_inputs'] = tx_in_file
     data['files']['transaction_outputs'] = tx_out_file
     data['files']['ascii_coinbase_messages'] = ascii_coinbase_messages_file
     data['files']['utf8_address_messages'] = utf8_address_messages_file
@@ -273,7 +273,17 @@ def main():
                 for output_index, output in enumerate(transaction.outputs):
 
                     # if output.script.is_return():
-                    #         print('found SCRIPT OP_RETURN IN TX: {}'.format(transaction.hash))
+                    #     print('-------------------------------------------------')
+                    #     print('found SCRIPT OP_RETURN IN TX: {}'.format(transaction.hash))
+                    #     op_return_data = None
+                    #     for opcode, byts, sop_idx in output.script.script.raw_iter():
+                    #         if opcode == 106 and sop_idx == 0:
+                    #             op_return_data = bytearray()
+                    #         elif op_return_data != None and opcode <= 78:
+                    #             op_return_data += byts
+                    #     if op_return_data != None:
+                    #         print(op_return_data)
+
 
                     for address_index, address in enumerate(output.addresses):
 
@@ -337,7 +347,8 @@ def main():
                                     'tags': '',
                                     'bookmarked': 0,
                                     'reviewed': 0,
-                                    'annotation': ''
+                                    'annotation': '',
+                                    'format': 0
                                 })
 
                                 # print('---------------------------------------------')
