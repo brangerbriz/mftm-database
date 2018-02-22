@@ -123,6 +123,7 @@ CREATE INDEX `valid_index` ON `ascii_coinbase_messages` (`valid`);
 CREATE INDEX `reviewed_index` ON `ascii_coinbase_messages` (`reviewed`);
 CREATE INDEX `bookmarked_index` ON `ascii_coinbase_messages` (`bookmarked`);
 CREATE INDEX `nsfw_index` ON `ascii_coinbase_messages` (`nsfw`);
+CREATE INDEX `data_hash_index` ON `ascii_coinbase_messages` (`data_hash`);
 CREATE INDEX `transaction_data_index` ON `ascii_coinbase_messages` (`data`);
 
 CREATE INDEX `transaction_hash_index` ON `utf8_address_messages` (`transaction_hash`);
@@ -131,6 +132,7 @@ CREATE INDEX `valid_index` ON `utf8_address_messages` (`valid`);
 CREATE INDEX `reviewed_index` ON `utf8_address_messages` (`reviewed`);
 CREATE INDEX `bookmarked_index` ON `utf8_address_messages` (`bookmarked`);
 CREATE INDEX `nsfw_index` ON `utf8_address_messages` (`nsfw`);
+CREATE INDEX `data_hash_index` ON `utf8_address_messages` (`data_hash`);
 CREATE INDEX `transaction_data_index` ON `utf8_address_messages` (`data` (50));
 
 CREATE INDEX `transaction_hash_index` ON `file_address_messages` (`transaction_hash`);
@@ -139,6 +141,7 @@ CREATE INDEX `valid_index` ON `file_address_messages` (`valid`);
 CREATE INDEX `reviewed_index` ON `file_address_messages` (`reviewed`);
 CREATE INDEX `bookmarked_index` ON `file_address_messages` (`bookmarked`);
 CREATE INDEX `nsfw_index` ON `file_address_messages` (`nsfw`);
+CREATE INDEX `data_hash_index` ON `file_address_messages` (`data_hash`);
 CREATE INDEX `transaction_data_index` ON `file_address_messages` (`data` (50));
 
 CREATE INDEX `transaction_hash_index` ON `op_return_utf8_address_messages` (`transaction_hash`);
@@ -147,6 +150,7 @@ CREATE INDEX `valid_index` ON `op_return_utf8_address_messages` (`valid`);
 CREATE INDEX `reviewed_index` ON `op_return_utf8_address_messages` (`reviewed`);
 CREATE INDEX `bookmarked_index` ON `op_return_utf8_address_messages` (`bookmarked`);
 CREATE INDEX `nsfw_index` ON `op_return_utf8_address_messages` (`nsfw`);
+CREATE INDEX `data_hash_index` ON `op_return_utf8_address_messages` (`data_hash`);
 CREATE INDEX `transaction_data_index` ON `op_return_utf8_address_messages` (`data` (50));
 
 CREATE INDEX `transaction_hash_index` ON `op_return_file_address_messages` (`transaction_hash`);
@@ -155,6 +159,7 @@ CREATE INDEX `valid_index` ON `op_return_file_address_messages` (`valid`);
 CREATE INDEX `reviewed_index` ON `op_return_file_address_messages` (`reviewed`);
 CREATE INDEX `bookmarked_index` ON `op_return_file_address_messages` (`bookmarked`);
 CREATE INDEX `nsfw_index` ON `op_return_file_address_messages` (`nsfw`);
+CREATE INDEX `data_hash_index` ON `op_return_file_address_messages` (`data_hash`);
 CREATE INDEX `transaction_data_index` ON `op_return_file_address_messages` (`data` (50));
 
 -- create tables for ascii_coinbase_messages, utf8_address_messages, and 
