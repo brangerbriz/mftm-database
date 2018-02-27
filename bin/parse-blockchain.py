@@ -4,6 +4,7 @@ import sys
 sys.path.append('../lib/python-bitcoin-blockchain-parser')
 sys.path.append('../src')
 
+import re
 import os
 import csv
 import binascii
@@ -19,18 +20,14 @@ def parse_args():
     parser = argparse.ArgumentParser(
                         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--block-dir', type=str, default='~/.bitcoin/blocks', dest='block_dir',
-                        help='path to bitcoin block data (default: ~/.bitcoin/blocks).')
+                        help='path to bitcoin block data.')
     parser.add_argument('--output-dir', type=str, dest='output_dir',
-                        default='../data/csv',
-                        help='directory to save output csv files to (default: ../data/csv).')
+                        default='../data/csv_copy',
+                        help='directory to save output csv files to.')
     parser.add_argument('--resume', default=False, action='store_true',
                         help='resume parsing from files in --output-dir')
-    parser.add_argument('--blockfile-lookback', default=1, type=int, dest='blockfile_lookback',
-                        help='The number of .dat blockfiles to look back when looking for '
-                             'the block hash checkpoint when using --resume. A larger '
-                             'value may result in higher ram consumption with the trade off '
-                             'that there is a higher chance that it will be able to recover '
-                             'from the checkpoint.')
+    parser.add_argument('--separate-files', default=True, action='store_true', dest='separate_files',
+                        help='resume parsing from files in --output-dir')
     return parser.parse_args()
 
 # ASCII Coinbase Messages
@@ -44,15 +41,34 @@ def parse_args():
 # OP_RETURN File Address Messages
 #   block_height, block_hash, block_timestamp, transaction_index, transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation, uses_op_return
 
-def open_csv_writers(folder, append):
+def open_csv_writers(folder, resume, separate_files):
 
-    open_as = 'a' if append else 'w'
+    open_as = 'a' if resume and not separate_files else 'w'
 
-    ascii_coinbase_messages_file = open(os.path.join(folder, 'ascii_coinbase_messages.csv'), open_as, encoding='utf-8')
-    utf8_address_messages_file = open(os.path.join(folder, 'utf8_address_messages.csv'), open_as, encoding='utf-8')
-    file_address_messages_file = open(os.path.join(folder, 'file_address_messages.csv'), open_as, encoding='utf-8')
-    op_return_utf8_address_messages_file = open(os.path.join(folder, 'op_return_utf8_address_messages.csv'), open_as, encoding='utf-8')
-    op_return_file_address_messages_file = open(os.path.join(folder, 'op_return_file_address_messages.csv'), open_as, encoding='utf-8')
+    file_prefix = ''
+    # if we are resuming with separate files, find the appropriate next
+    # number to use for the file prefix (e.g. 0001_ -> 0002_)
+    if resume and separate_files:
+        files = [file for file in os.listdir(folder) if re.match('^\d{4}_.+\.csv$', file)]
+        if len(files) == 0:
+            file_prefix = '0001_'
+            print(file_prefix)
+        else:
+            num = int(sorted(files, reverse=True)[0][0:4]) + 1
+            file_prefix = '{:04d}_'.format(num)
+
+    ascii_coinbase_messages_file = open(os.path.join(folder, '{}ascii_coinbase_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
+    utf8_address_messages_file = open(os.path.join(folder, '{}utf8_address_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
+    file_address_messages_file = open(os.path.join(folder, '{}file_address_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
+    op_return_utf8_address_messages_file = open(os.path.join(folder, '{}op_return_utf8_address_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
+    op_return_file_address_messages_file = open(os.path.join(folder, '{}op_return_file_address_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
+
+    print('[+] writing to files:')
+    print('        {}ascii_coinbase_messages.csv'.format(file_prefix))
+    print('        {}utf8_address_messages.csv'.format(file_prefix))
+    print('        {}file_address_messages.csv'.format(file_prefix))
+    print('        {}op_return_utf8_address_messages.csv'.format(file_prefix))
+    print('        {}op_return_file_address_messages.csv'.format(file_prefix))
 
     kwargs = {
         'dialect': csv.excel,
@@ -75,7 +91,8 @@ def open_csv_writers(folder, append):
     fieldnames = ['block_height', 'block_hash', 'block_timestamp', 'blockfile', 'transaction_index', 'transaction_hash', 'data', 'filetype', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
     op_return_file_address_messages_writer = csv.DictWriter(op_return_file_address_messages_file, fieldnames=fieldnames, **kwargs)
 
-    if not append:
+    # write file headers if we aren't resuming or we are writing to separate files
+    if not resume or separate_files:
         ascii_coinbase_messages_writer.writeheader()
         utf8_address_messages_writer.writeheader()
         file_address_messages_writer.writeheader()
@@ -86,16 +103,15 @@ def open_csv_writers(folder, append):
     data['files'] = dict()
     data['writers'] = dict()
 
-    data['files']['ascii_coinbase_messages']    = ascii_coinbase_messages_file
-    data['files']['utf8_address_messages']      = utf8_address_messages_file
-    data['files']['file_address_messages']      = file_address_messages_file
+    data['files']['ascii_coinbase_messages']         = ascii_coinbase_messages_file
+    data['files']['utf8_address_messages']           = utf8_address_messages_file
+    data['files']['file_address_messages']           = file_address_messages_file
     data['files']['op_return_utf8_address_messages'] = op_return_utf8_address_messages_file
     data['files']['op_return_file_address_messages'] = op_return_file_address_messages_file
 
-
-    data['writers']['ascii_coinbase_messages']    = ascii_coinbase_messages_writer
-    data['writers']['utf8_address_messages']      = utf8_address_messages_writer
-    data['writers']['file_address_messages']      = file_address_messages_writer
+    data['writers']['ascii_coinbase_messages']         = ascii_coinbase_messages_writer
+    data['writers']['utf8_address_messages']           = utf8_address_messages_writer
+    data['writers']['file_address_messages']           = file_address_messages_writer
     data['writers']['op_return_utf8_address_messages'] = op_return_utf8_address_messages_writer
     data['writers']['op_return_file_address_messages'] = op_return_file_address_messages_writer
 
@@ -118,25 +134,18 @@ def decode_address_uft8(base58address):
     except UnicodeDecodeError as err:
         return None
 
-# read the last row of blocks.csv and return an oject with:
-# { block_height, block_hash, blockfile }
-def get_last_block(blocks_csv_path):
-
-    with open(blocks_csv_path, 'r') as f:
-        reader = csv.reader(f)
-        # skip the header
-        next(reader)
-        last_row = list(reversed(list(reader)))[0]
-        return {
-            'block_height': int(last_row[0]),
-            'block_hash': last_row[1],
-            'blockfile': last_row[3]
-        }
+# read the last block height from a .txt file if it exists
+# otherwise return 0
+def get_last_block_height(last_block_path):
+    if os.path.exists(last_block_path):
+        with open(last_block_path, 'r') as f:
+            return int(f.read())
+    else: return 0
 
 def main():
 
     args = parse_args()
-    data = open_csv_writers(args.output_dir, args.resume)
+    data = open_csv_writers(args.output_dir, args.resume, args.separate_files)
 
     needs_exit = False
 
@@ -148,37 +157,24 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)
 
     kwargs = {}
+
+    start_block = 0
     if args.resume:
-        resume_block = get_last_block(os.path.join(args.output_dir, 'ascii_coinbase_messages.csv'))
-        print('[*] resuming with block #{}: {}'.format(resume_block['block_height'], resume_block['block_hash']))
-
-        blockfile = resume_block['blockfile']
-        blockfile_num = int(resume_block['blockfile'][3:-4])
-        print('[*] transaction found in blockfile {}'.format(resume_block['blockfile']))
-        # if this transaction didn't occur in the first .dat file
-        if blockfile_num != 0:
-            if blockfile_num - args.blockfile_lookback >= 0:
-                blockfile_num -= args.blockfile_lookback
-            else:
-                blockfile_num = 0
-            # use --blockfile_lookback to load an earlier .dat file
-            blockfile = 'blk{}.dat'.format(str(blockfile_num).zfill(5))
-        print('[*] looking as far back as blockfile {}'.format(blockfile))
-        kwargs['start_blockfile_basename'] = blockfile
-        kwargs['resume_block_hash'] = resume_block['block_hash']
-        kwargs['resume_block_height'] = resume_block['block_height']
-
+        start_block = get_last_block_height(os.path.join(args.output_dir, 'last_block.txt'))
+        start_block += 1
+        print('[*] resuming with block #{}'.format(start_block))
 
     blockchain = Blockchain(args.block_dir)
     last_block_height = -1
-    for block, blk_file in blockchain.get_ordered_blocks(**kwargs):
+    print('[*] building the blockchain index')
+    for block in blockchain.get_ordered_blocks(os.path.join(args.block_dir, 'index'), start=start_block):
 
+        print('[+] parsing block #{}: {}'.format(block.height, block.hash))
         # double check that ordered blocks are working
         # assert(block.height == last_block_height + 1)
         last_block_height = block.height
 
         for tx_index, transaction in enumerate(block.transactions):
-
             # if this is the first transaction in the block save its
             # coinbase if it is in the ascii range
             if tx_index == 0:
@@ -202,7 +198,7 @@ def main():
                                     'block_height': block.height,
                                     'block_hash': block.hash,
                                     'block_timestamp': block.header.timestamp,
-                                    'blockfile': os.path.basename(blk_file),
+                                    'blockfile': '',
                                     'transaction_hash': transaction.hash,
                                     'script_op_index': op_index,
                                     'data': coinbase_message,
@@ -271,7 +267,7 @@ def main():
                                     'block_height': block.height,
                                     'block_hash': block.hash,
                                     'block_timestamp': block.header.timestamp,
-                                    'blockfile': os.path.basename(blk_file),
+                                    'blockfile': '',
                                     'transaction_index': tx_index,
                                     'transaction_hash': transaction.hash,
                                     # save binary data as a hex string
@@ -294,7 +290,7 @@ def main():
                                     'block_height': block.height,
                                     'block_hash': block.hash,
                                     'block_timestamp': block.header.timestamp,
-                                    'blockfile': os.path.basename(blk_file),
+                                    'blockfile': '',
                                     'transaction_index': tx_index,
                                     'transaction_hash': transaction.hash,
                                     # save utf8 data as a hex string
@@ -321,7 +317,7 @@ def main():
                             'block_height': block.height,
                             'block_hash': block.hash,
                             'block_timestamp': block.header.timestamp,
-                            'blockfile': os.path.basename(blk_file),
+                            'blockfile': '',
                             'transaction_index': tx_index,
                             'transaction_hash': transaction.hash,
                             # save binary data as a hex string
@@ -350,7 +346,7 @@ def main():
                                 'block_height': block.height,
                                 'block_hash': block.hash,
                                 'block_timestamp': block.header.timestamp,
-                                'blockfile': os.path.basename(blk_file),
+                                'blockfile': '',
                                 'transaction_index': tx_index,
                                 'transaction_hash': transaction.hash,
                                 # save utf8 data as a hex string
@@ -369,6 +365,10 @@ def main():
 
             except CScriptTruncatedPushDataError as err:
                 print('[!] caught 1: {}'.format(err), file=sys.stderr)
+
+        # save the block height so that it can be resumed from later
+        with open(os.path.join(args.output_dir, 'last_block.txt'), 'w') as f:
+            f.write(str(block.height))
 
         if block.height % 1000 == 0 or needs_exit:
 
