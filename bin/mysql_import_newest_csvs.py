@@ -41,5 +41,9 @@ def main():
     cursor.close()
     cnx.close()
 
+    with open('../data/csv/imported.txt', 'a') as f:
+        f.write('\n'.join(files))
+        print('wrote filenames to ../data/csv/imported.txt'.format(byts))
+
 if __name__ == '__main__':
     main()
