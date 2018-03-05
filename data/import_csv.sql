@@ -1,4 +1,4 @@
-USE `messages_from_the_mines_abreviated`;
+USE `messages_from_the_mines`;
 
 -- these will likely spit out warnings like:
 --     Warning	1261	Row 1 doesn't contain data for all columns
@@ -7,15 +7,15 @@ USE `messages_from_the_mines_abreviated`;
 -- end of the schema, so it shouldn't be a problem.
 
 -- this is a print statement in SQL, lol
-SELECT '[+] importing ascii_coinbase_messages' AS '';
-LOAD DATA LOCAL INFILE './csv/ascii_coinbase_messages.csv'  
-INTO TABLE `ascii_coinbase_messages` 
+SELECT '[+] importing coinbase_messages' AS '';
+LOAD DATA LOCAL INFILE './csv/coinbase_messages.csv'  
+INTO TABLE `coinbase_messages` 
 FIELDS TERMINATED BY ',' 
 OPTIONALLY ENCLOSED BY '\"' IGNORE 1 LINES; SHOW WARNINGS;
 
-SELECT '[+] importing utf8_address_messages' AS '';
-LOAD DATA LOCAL INFILE './csv/utf8_address_messages.csv'  
-INTO TABLE `utf8_address_messages` 
+SELECT '[+] importing address_messages' AS '';
+LOAD DATA LOCAL INFILE './csv/address_messages.csv'  
+INTO TABLE `address_messages` 
 FIELDS TERMINATED BY ',' 
 OPTIONALLY ENCLOSED BY '\"' IGNORE 1 LINES; SHOW WARNINGS;
 
@@ -25,9 +25,9 @@ INTO TABLE `file_address_messages`
 FIELDS TERMINATED BY ',' 
 OPTIONALLY ENCLOSED BY '\"' IGNORE 1 LINES; SHOW WARNINGS;
 
-SELECT '[+] importing op_return_utf8_address_messages' AS '';
-LOAD DATA LOCAL INFILE './csv/op_return_utf8_address_messages.csv'  
-INTO TABLE `op_return_utf8_address_messages` 
+SELECT '[+] importing op_return_address_messages' AS '';
+LOAD DATA LOCAL INFILE './csv/op_return_address_messages.csv'  
+INTO TABLE `op_return_address_messages` 
 FIELDS TERMINATED BY ',' 
 OPTIONALLY ENCLOSED BY '\"' IGNORE 1 LINES; SHOW WARNINGS;
 
@@ -37,16 +37,8 @@ INTO TABLE `op_return_file_address_messages`
 FIELDS TERMINATED BY ',' 
 OPTIONALLY ENCLOSED BY '\"' IGNORE 1 LINES; SHOW WARNINGS;
 
--- populate `data_hash` fields with MD5 hashes of `data` columns
-SELECT '[+] populating `data_hash` columns for all tables' AS '';
-UPDATE `ascii_coinbase_messages`         SET `data_hash` = MD5(`data`) WHERE `data_hash` IS NULL;
-UPDATE `utf8_address_messages`           SET `data_hash` = MD5(`data`) WHERE `data_hash` IS NULL;
-UPDATE `file_address_messages`           SET `data_hash` = MD5(`data`) WHERE `data_hash` IS NULL;
-UPDATE `op_return_utf8_address_messages` SET `data_hash` = MD5(`data`) WHERE `data_hash` IS NULL;
-UPDATE `op_return_file_address_messages` SET `data_hash` = MD5(`data`) WHERE `data_hash` IS NULL;
-
 -- copy data from original tables into the three unique tables
 SELECT '[+] copying original table data to unique tables' AS '';
-INSERT IGNORE `ascii_coinbase_messages_unique`          SELECT * FROM `ascii_coinbase_messages`;
-INSERT IGNORE `utf8_address_messages_unique`            SELECT * FROM `utf8_address_messages`;
-INSERT IGNORE `op_return_utf8_address_messages_unique`  SELECT * FROM `op_return_utf8_address_messages`;
+INSERT IGNORE `coinbase_messages_unique`           SELECT * FROM `coinbase_messages`;
+INSERT IGNORE `address_messages_unique`            SELECT * FROM `address_messages`;
+INSERT IGNORE `op_return_address_messages_unique`  SELECT * FROM `op_return_address_messages`;

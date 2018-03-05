@@ -6,7 +6,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
                         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--input', type=str, default='../data/csv/file_address_messages.csv',
-                        help='path to a file_address_messages.csv or utf8_address_messages.csv'
+                        help='path to a file_address_messages.csv or address_messages.csv'
                         ' file (default: ../data/csv/file_address_messages.csv).')
     parser.add_argument('--output-dir', type=str, dest='output_dir',
                         default='../data/blockchain-files',
@@ -29,10 +29,10 @@ def main():
 		num_saved = 0
 		for row in reader:			
 			
-			folder = 'utf8' if 'utf8_address_messages.csv' in args.input else row['filetype']
+			folder = 'utf8' if 'address_messages.csv' in args.input else row['filetype']
 			folder = os.path.join(args.output_dir, folder)
 
-			ext = 'txt' if 'utf8_address_messages.csv' in args.input else row['filetype']
+			ext = 'txt' if 'address_messages.csv' in args.input else row['filetype']
 			filename = os.path.join(folder, '{}_{}.{}'.format(str(num_saved).zfill(5), row['transaction_hash'], ext))
 			
 			if not os.path.isdir(folder):

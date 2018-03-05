@@ -7,6 +7,7 @@ sys.path.append('../src')
 import re
 import os
 import csv
+import hashlib
 import binascii
 import argparse
 import signal
@@ -30,17 +31,6 @@ def parse_args():
                         help='resume parsing from files in --output-dir')
     return parser.parse_args()
 
-# ASCII Coinbase Messages
-# 	block_height, block_hash, block_timestamp, transaction_hash ; script_op_index ; data ; valid ; tags ; bookmarked ; reviewed ; annotation
-# UTF-8 Address Messages
-# 	block_height, block_hash, block_timestamp, transaction_index, transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation, format
-# File Address Messages
-# 	block_height, block_hash, block_timestamp, transaction_index, transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation, uses_op_return
-# OP_RETURN UTF-8 Address Messages
-#   block_height, block_hash, block_timestamp, transaction_index, transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation, format
-# OP_RETURN File Address Messages
-#   block_height, block_hash, block_timestamp, transaction_index, transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation, uses_op_return
-
 def open_csv_writers(folder, resume, separate_files):
 
     open_as = 'a' if resume and not separate_files else 'w'
@@ -57,17 +47,17 @@ def open_csv_writers(folder, resume, separate_files):
             num = int(sorted(files, reverse=True)[0][0:4]) + 1
             file_prefix = '{:04d}_'.format(num)
 
-    ascii_coinbase_messages_file = open(os.path.join(folder, '{}ascii_coinbase_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
-    utf8_address_messages_file = open(os.path.join(folder, '{}utf8_address_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
+    coinbase_messages_file = open(os.path.join(folder, '{}coinbase_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
+    address_messages_file = open(os.path.join(folder, '{}address_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
     file_address_messages_file = open(os.path.join(folder, '{}file_address_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
-    op_return_utf8_address_messages_file = open(os.path.join(folder, '{}op_return_utf8_address_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
+    op_return_address_messages_file = open(os.path.join(folder, '{}op_return_address_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
     op_return_file_address_messages_file = open(os.path.join(folder, '{}op_return_file_address_messages.csv'.format(file_prefix)), open_as, encoding='utf-8')
 
     print('[+] writing to files:')
-    print('        {}ascii_coinbase_messages.csv'.format(file_prefix))
-    print('        {}utf8_address_messages.csv'.format(file_prefix))
+    print('        {}coinbase_messages.csv'.format(file_prefix))
+    print('        {}address_messages.csv'.format(file_prefix))
     print('        {}file_address_messages.csv'.format(file_prefix))
-    print('        {}op_return_utf8_address_messages.csv'.format(file_prefix))
+    print('        {}op_return_address_messages.csv'.format(file_prefix))
     print('        {}op_return_file_address_messages.csv'.format(file_prefix))
 
     kwargs = {
@@ -76,43 +66,53 @@ def open_csv_writers(folder, resume, separate_files):
         'doublequote': False
     }
 
-    fieldnames = ['block_height', 'block_hash', 'block_timestamp', 'blockfile', 'transaction_hash', 'script_op_index', 'data', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
-    ascii_coinbase_messages_writer = csv.DictWriter(ascii_coinbase_messages_file, fieldnames=fieldnames, **kwargs)
+    fieldnames = ['block_height', 'block_hash', 'block_timestamp', 
+    'transaction_hash', 'script_op_index', 'data', 'valid', 'tags', 'bookmarked',
+     'reviewed', 'annotation', 'nsfw', 'data_hash']
+    coinbase_messages_writer = csv.DictWriter(coinbase_messages_file, fieldnames=fieldnames, **kwargs)
 
-    fieldnames = ['block_height', 'block_hash', 'block_timestamp', 'blockfile', 'transaction_index', 'transaction_hash', 'data', 'filetype', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation', 'format']
-    utf8_address_messages_writer = csv.DictWriter(utf8_address_messages_file, fieldnames=fieldnames, **kwargs)
+    fieldnames = ['block_height', 'block_hash', 'block_timestamp', 
+    'transaction_index', 'transaction_hash', 'data', 'valid', 'tags',
+    'bookmarked', 'reviewed', 'annotation', 'format', 'nsfw', 'data_hash']
+    address_messages_writer = csv.DictWriter(address_messages_file, fieldnames=fieldnames, **kwargs)
 
-    fieldnames = ['block_height', 'block_hash', 'block_timestamp', 'blockfile', 'transaction_index', 'transaction_hash', 'data', 'filetype', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
+    fieldnames = ['block_height', 'block_hash', 'block_timestamp', 
+    'transaction_index', 'transaction_hash', 'data', 'filetype', 'valid', 'tags',
+     'bookmarked', 'reviewed', 'annotation', 'nsfw', 'data_hash']
     file_address_messages_writer = csv.DictWriter(file_address_messages_file, fieldnames=fieldnames, **kwargs)
 
-    fieldnames = ['block_height', 'block_hash', 'block_timestamp', 'blockfile', 'transaction_index', 'transaction_hash', 'data', 'filetype', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation', 'format']
-    op_return_utf8_address_messages_writer = csv.DictWriter(op_return_utf8_address_messages_file, fieldnames=fieldnames, **kwargs)
+    fieldnames = ['block_height', 'block_hash', 'block_timestamp', 
+    'transaction_index', 'transaction_hash', 'data', 'valid', 'tags', 
+    'bookmarked', 'reviewed', 'annotation', 'format', 'nsfw', 'data_hash']
+    op_return_address_messages_writer = csv.DictWriter(op_return_address_messages_file, fieldnames=fieldnames, **kwargs)
 
-    fieldnames = ['block_height', 'block_hash', 'block_timestamp', 'blockfile', 'transaction_index', 'transaction_hash', 'data', 'filetype', 'valid', 'tags', 'bookmarked', 'reviewed', 'annotation']
+    fieldnames = ['block_height', 'block_hash', 'block_timestamp',
+    'transaction_index', 'transaction_hash', 'data', 'filetype', 'valid', 'tags',
+     'bookmarked', 'reviewed', 'annotation', 'nsfw', 'data_hash']
     op_return_file_address_messages_writer = csv.DictWriter(op_return_file_address_messages_file, fieldnames=fieldnames, **kwargs)
 
     # write file headers if we aren't resuming or we are writing to separate files
     if not resume or separate_files:
-        ascii_coinbase_messages_writer.writeheader()
-        utf8_address_messages_writer.writeheader()
+        coinbase_messages_writer.writeheader()
+        address_messages_writer.writeheader()
         file_address_messages_writer.writeheader()
-        op_return_utf8_address_messages_writer.writeheader()
+        op_return_address_messages_writer.writeheader()
         op_return_file_address_messages_writer.writeheader()
 
     data = dict()
     data['files'] = dict()
     data['writers'] = dict()
 
-    data['files']['ascii_coinbase_messages']         = ascii_coinbase_messages_file
-    data['files']['utf8_address_messages']           = utf8_address_messages_file
+    data['files']['coinbase_messages']         = coinbase_messages_file
+    data['files']['address_messages']           = address_messages_file
     data['files']['file_address_messages']           = file_address_messages_file
-    data['files']['op_return_utf8_address_messages'] = op_return_utf8_address_messages_file
+    data['files']['op_return_address_messages'] = op_return_address_messages_file
     data['files']['op_return_file_address_messages'] = op_return_file_address_messages_file
 
-    data['writers']['ascii_coinbase_messages']         = ascii_coinbase_messages_writer
-    data['writers']['utf8_address_messages']           = utf8_address_messages_writer
+    data['writers']['coinbase_messages']         = coinbase_messages_writer
+    data['writers']['address_messages']           = address_messages_writer
     data['writers']['file_address_messages']           = file_address_messages_writer
-    data['writers']['op_return_utf8_address_messages'] = op_return_utf8_address_messages_writer
+    data['writers']['op_return_address_messages'] = op_return_address_messages_writer
     data['writers']['op_return_file_address_messages'] = op_return_file_address_messages_writer
 
     return data
@@ -122,6 +122,17 @@ def close_csv_files(files):
 
 def is_ascii_text(op):
     return all(32 <= x <= 127 for x in op)
+
+def as_utf8_text(x):
+    try:
+        return x.decode('UTF-8')
+    except UnicodeDecodeError:
+        return None
+
+def md5_hash(data):
+    md5 = hashlib.new('md5')
+    md5.update(bytes(data, encoding='utf8'))
+    return md5.hexdigest()
 
 # returns utf8 data if address data falls in range
 # and None otherwise
@@ -169,7 +180,7 @@ def main():
     print('[*] building the blockchain index')
     for block in blockchain.get_ordered_blocks(os.path.join(args.block_dir, 'index'), start=start_block):
 
-        print('[+] parsing block #{}: {}'.format(block.height, block.hash))
+        # print('[+] parsing block #{}: {}'.format(block.height, block.hash))
         # double check that ordered blocks are working
         # assert(block.height == last_block_height + 1)
         last_block_height = block.height
@@ -183,37 +194,40 @@ def main():
 
                 # Some coinbase scripts are not valid scripts
                 try:
-                    script_operations = coinbase.script.operations
+                    script_operations = [op for op in coinbase.script.operations
+                                         if type(op) == bytes]
 
                     # An operation is a CScriptOP or pushed bytes
                     for op_index, operation in enumerate(script_operations):
-                        if type(operation) == bytes and len(operation) > 3 \
-                                and is_ascii_text(operation):
-                            try:
-                                # try and decode the data as text
+                        if len(operation) > 4:      
+                            coinbase_message = None
+                            if is_ascii_text(operation):
                                 coinbase_message = operation.decode('ascii')
+                            elif as_utf8_text(operation) and len(operation.strip(b'\x00')) >= 20:
+                                coinbase_message = as_utf8_text(operation)
 
-                                # write the coinbase message info to ascii_coinbase_messages.csv
-                                data['writers']['ascii_coinbase_messages'].writerow({
+                            if coinbase_message:
+                                coinbase_message_data = binascii.hexlify(bytes(coinbase_message, encoding='utf8')).decode()
+                                # write the coinbase message info to coinbase_messages.csv
+                                data['writers']['coinbase_messages'].writerow({
                                     'block_height': block.height,
                                     'block_hash': block.hash,
                                     'block_timestamp': block.header.timestamp,
-                                    'blockfile': '',
                                     'transaction_hash': transaction.hash,
                                     'script_op_index': op_index,
-                                    'data': coinbase_message,
+                                    'data': coinbase_message_data,
+                                    'data_hash': md5_hash(coinbase_message_data),
                                     'valid': 0,
                                     'tags': '',
                                     'bookmarked': 0,
                                     'reviewed': 0,
-                                    'annotation': ''
+                                    'annotation': '',
+                                    'nsfw':0,
                                 })
 
-                                # print('[+] coinbase found in tx {} script index {}:'.format(transaction.hash, op_index))
-                                # print(coinbase_message)
+                                print('[+] coinbase found in tx {} script index {}:'.format(transaction.hash, op_index))
+                                print(coinbase_message)
 
-                            except UnicodeDecodeError as err:
-                                pass
                 except CScriptInvalidError:
                     pass
 
@@ -262,22 +276,24 @@ def main():
                             filetype = signatures.get_filetype(address_bytes_buff.hex())
                             if filetype:
                                 # transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation
-                                # write the coinbase message info to ascii_coinbase_messages.csv
+                                # write the coinbase message info to coinbase_messages.csv
+                                file_address_message = address_bytes_buff.hex()
                                 data['writers']['file_address_messages'].writerow({
                                     'block_height': block.height,
                                     'block_hash': block.hash,
                                     'block_timestamp': block.header.timestamp,
-                                    'blockfile': '',
                                     'transaction_index': tx_index,
                                     'transaction_hash': transaction.hash,
                                     # save binary data as a hex string
-                                    'data': address_bytes_buff.hex(),
+                                    'data': file_address_message,
+                                    'data_hash': md5_hash(file_address_message),
                                     'filetype': filetype,
                                     'valid': 0,
                                     'tags': '',
                                     'bookmarked': 0,
                                     'reviewed': 0,
-                                    'annotation': ''
+                                    'annotation': '',
+                                    'nsfw': 0
                                 })
 
                                 print('[+] possible address {} file found in tx {}'.format(filetype, transaction.hash))
@@ -285,23 +301,24 @@ def main():
                             # if text was found in any of the output address blocks
                             if address_text_buff != '':
                                 # transaction_hash ; data ; filetype ; valid ; tags ; bookmarked ; reviewed ; annotation
-                                # write the coinbase message info to ascii_coinbase_messages.csv
-                                data['writers']['utf8_address_messages'].writerow({
+                                # write the coinbase message info to coinbase_messages.csv
+                                address_message = binascii.hexlify(bytes(address_text_buff, encoding='utf8')).decode()
+                                data['writers']['address_messages'].writerow({
                                     'block_height': block.height,
                                     'block_hash': block.hash,
                                     'block_timestamp': block.header.timestamp,
-                                    'blockfile': '',
                                     'transaction_index': tx_index,
                                     'transaction_hash': transaction.hash,
                                     # save utf8 data as a hex string
-                                    'data': binascii.hexlify(bytes(address_text_buff, encoding='utf8')).decode(),
-                                    'filetype': '',
+                                    'data': address_message,
+                                    'data_hash': md5_hash(address_message),
                                     'valid': 0,
                                     'tags': '',
                                     'bookmarked': 0,
                                     'reviewed': 0,
                                     'annotation': '',
-                                    'format': 0
+                                    'format': 0,
+                                    'nsfw': 0
                                 })
 
                                 print('[+] utf8 data found in tx {}:'.format(transaction.hash))
@@ -312,22 +329,23 @@ def main():
 
                     filetype = signatures.get_filetype(op_return_bytes_buff.hex())
                     if filetype:
-
+                        op_return_file_address_message = op_return_bytes_buff.hex()
                         data['writers']['op_return_file_address_messages'].writerow({
                             'block_height': block.height,
                             'block_hash': block.hash,
                             'block_timestamp': block.header.timestamp,
-                            'blockfile': '',
                             'transaction_index': tx_index,
                             'transaction_hash': transaction.hash,
                             # save binary data as a hex string
-                            'data': op_return_bytes_buff.hex(),
+                            'data': op_return_file_address_message,
+                            'data_hash': md5_hash(op_return_file_address_message),
                             'filetype': filetype,
                             'valid': 0,
                             'tags': '',
                             'bookmarked': 0,
                             'reviewed': 0,
-                            'annotation': ''
+                            'annotation': '',
+                            'nsfw': 0
                         })
 
                         print('[+] possible op_return address {} file found in tx {}'.format(filetype, transaction.hash))
@@ -342,22 +360,23 @@ def main():
                             pass
 
                         if text:
-                            data['writers']['op_return_utf8_address_messages'].writerow({
+                            op_return_address_message = binascii.hexlify(bytes(text, encoding='utf8')).decode()
+                            data['writers']['op_return_address_messages'].writerow({
                                 'block_height': block.height,
                                 'block_hash': block.hash,
                                 'block_timestamp': block.header.timestamp,
-                                'blockfile': '',
                                 'transaction_index': tx_index,
                                 'transaction_hash': transaction.hash,
                                 # save utf8 data as a hex string
-                                'data': binascii.hexlify(bytes(text, encoding='utf8')).decode(),
-                                'filetype': '',
+                                'data': op_return_address_message,
+                                'data_hash': md5_hash(op_return_address_message),
                                 'valid': 0,
                                 'tags': '',
                                 'bookmarked': 0,
                                 'reviewed': 0,
                                 'annotation': '',
-                                'format': 0
+                                'format': 0,
+                                'nsfw': 0
                             })
 
                             print('[+] op_return utf8 data found in tx {}:'.format(transaction.hash))
@@ -373,10 +392,10 @@ def main():
         if block.height % 1000 == 0 or needs_exit:
 
             # flush files after each 1000 blocks, because fuuuuuuuuuu for not
-            data['files']['ascii_coinbase_messages'].flush()
-            data['files']['utf8_address_messages'].flush()
+            data['files']['coinbase_messages'].flush()
+            data['files']['address_messages'].flush()
             data['files']['file_address_messages'].flush()
-            data['files']['op_return_utf8_address_messages'].flush()
+            data['files']['op_return_address_messages'].flush()
             data['files']['op_return_file_address_messages'].flush()
 
             print('[+] block #{}'.format(block.height))
