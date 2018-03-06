@@ -1,3 +1,4 @@
+import sys
 import os
 import re
 import mysql.connector
@@ -8,6 +9,17 @@ def main():
     files = [file for file in os.listdir(folder) if re.match('^\d{4}_.+\.csv$', file)]
     if len(files) > 0:
         files = sorted(files, reverse=True)[0:5]
+
+    # make sure we haven't already imported these file names
+    already_imported = []
+    already_imported_path = '../data/csv/imported.txt'
+    if os.path.exists(already_imported_path):
+        with open(already_imported_path, 'r') as f:
+            already_imported = [line.strip() for line in f]
+    for file in files:
+        if file in already_imported:
+            print('Error file already imported: {}'.format(file))
+            sys.exit(1)
 
     cnx = mysql.connector.connect(user='root', password='bbpwn123',
                                   host='127.0.0.1',
@@ -22,6 +34,7 @@ def main():
     queries = []
 
     for file in files:
+        # extract the table name from the filename
         table = re.sub('^\d{4}_', '', file).replace('.csv', '')
         file = os.path.join(folder, file)
 
@@ -43,7 +56,8 @@ def main():
 
     with open('../data/csv/imported.txt', 'a') as f:
         f.write('\n'.join(files))
-        print('wrote filenames to ../data/csv/imported.txt'.format(byts))
+        f.write('\n')
+        print('wrote filenames to ../data/csv/imported.txt')
 
 if __name__ == '__main__':
     main()

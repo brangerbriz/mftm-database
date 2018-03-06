@@ -11,5 +11,5 @@ python3 parse-blockchain.py \
 	--resume \
 	--separate-files \
 && \
-python2 mysql_import_newest_csvs.py
+python2 mysql-import-newest-csvs.py
 
