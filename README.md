@@ -65,6 +65,23 @@ python3 parse-blockchain.py \
 
 Each time you run this, blockchain parsing will resume one block after the block specified in `../data/csv/last_block.txt`. Files will be saved as `0001_*.csv`, `0002_*.csv`, etc.
 
+## Editing MySQL Credentials
+
+You must add your MySQL user/database credentials to [`config.json`](config.json) before importing to the database. Here is an example of how this file should look:
+
+```json
+{
+	"mysql": {
+		"user": "root", 
+		"password": "change-me-or-get-pwned",
+        "host": "127.0.0.1",
+        "database": "messages_from_the_mines"
+	}
+}
+```
+
+**Note**: There are certain security vulnerabilities that may come with using the root MySQL user. It is recommended that you create a new MySQL user with appropriate read/write priviledges to the `messages_from_the_mines` schema and use that user instead. 
+
 ## Creating the MySQL Database
 
 Make sure your mysql server is running and you have a user. Next, create the `messages_from_the_mines` schema:
