@@ -1,9 +1,13 @@
 import sys
 import os
 import re
+import json
 import mysql.connector
 
 def main():
+
+    with open('../config.json') as f:
+        config = json.load(f)
 
     folder = '../data/csv/'
     files = [file for file in os.listdir(folder) if re.match('^\d{4}_.+\.csv$', file)]
@@ -21,9 +25,10 @@ def main():
             print('Error file already imported: {}'.format(file))
             sys.exit(1)
 
-    cnx = mysql.connector.connect(user='root', password='bbpwn123',
-                                  host='127.0.0.1',
-                                  database='messages_from_the_mines')
+    cnx = mysql.connector.connect(user=config['mysql']['user'], 
+                                  password=config['mysql']['password'],
+                                  host=config['mysql']['host'],
+                                  database=config['mysql']['database'])
     cursor = cnx.cursor()
 
     query_template = """LOAD DATA LOCAL INFILE '{file}'  

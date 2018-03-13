@@ -4,10 +4,8 @@
 -- COINBASES -------------------------------------------------------------------
 
 -- %/slush/% in coinbase_messages
-UPDATE `coinbase_messages_unique` SET `reviewed` = 1, `valid` = 0 WHERE `data` LIKE CONCAT('%', HEX('/slush/'), '%');
-UPDATE `coinbase_messages`        SET `reviewed` = 1, `valid` = 0 WHERE `data` LIKE CONCAT('%', HEX('/slush/'), '%');
-UPDATE `coinbase_messages_unique` SET `valid` = 1 WHERE `data` = HEX('/slush/');
-UPDATE `coinbase_messages`        SET `valid` = 1 WHERE `data` = HEX('/slush/');
+UPDATE `coinbase_messages_unique` SET `reviewed` = 1 WHERE `data` LIKE CONCAT('%', HEX('/slush/'), '%');
+UPDATE `coinbase_messages`        SET `reviewed` = 1 WHERE `data` LIKE CONCAT('%', HEX('/slush/'), '%');
 
 -- Mined by% in coinbase_messages
 UPDATE `coinbase_messages_unique` SET `reviewed` = 1 WHERE `data` LIKE CONCAT(HEX('Mined by'), '%');
@@ -113,7 +111,7 @@ UPDATE `op_return_address_messages`        SET `reviewed` = 1 WHERE CONVERT(UNHE
 -- and these headers are not very ambigious. These regexes flag 1-2 real messages
 -- only with the benifit of autolabelling 8K+.
 UPDATE `op_return_address_messages_unique` SET `reviewed` = 1 WHERE CONVERT(UNHEX(`data`) USING utf8mb4) REGEXP '^(CC|KC|CL |CS |OL |OS ).+';
-UPDATE `op_return_address_messages `       SET `reviewed` = 1 WHERE CONVERT(UNHEX(`data`) USING utf8mb4) REGEXP '^(CC|KC|CL |CS |OL |OS ).+';
+UPDATE `op_return_address_messages`       SET `reviewed` = 1 WHERE CONVERT(UNHEX(`data`) USING utf8mb4) REGEXP '^(CC|KC|CL |CS |OL |OS ).+';
 
 -- regex to match Bitcoin addresses
 UPDATE `op_return_address_messages_unique` SET `reviewed` = 1 WHERE CONVERT(UNHEX(`data`) USING utf8mb4) REGEXP '^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$';
@@ -121,7 +119,7 @@ UPDATE `op_return_address_messages`        SET `reviewed` = 1 WHERE CONVERT(UNHE
 
 -- regex to match hashes of length 39 and greater
 UPDATE `op_return_address_messages_unique` SET `reviewed` = 1 WHERE CONVERT(UNHEX(`data`) USING utf8mb4) REGEXP '^[0-9a-zA-Z]{39,}$';
-UPDATE `op_return_address_message`         SET `reviewed` = 1 WHERE CONVERT(UNHEX(`data`) USING utf8mb4) REGEXP '^[0-9a-zA-Z]{39,}$';
+UPDATE `op_return_address_messages`         SET `reviewed` = 1 WHERE CONVERT(UNHEX(`data`) USING utf8mb4) REGEXP '^[0-9a-zA-Z]{39,}$';
 
 -- e.g. "0=ce8050a0c5338256e8341ab63f1af01a4356ba7141ec0a6728dee2e325a53657"
 UPDATE `op_return_address_messages_unique` SET `reviewed` = 1 WHERE CONVERT(UNHEX(`data`) USING utf8mb4) REGEXP '^0=.{64}$';
